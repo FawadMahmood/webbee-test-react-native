@@ -10,10 +10,14 @@ import AttributesField from './field';
 import { Bounceable } from 'rn-bounceable';
 import { VectorIcon } from '../../components';
 import { theme } from '../../utils/constants';
+import SelectDropdown from 'react-native-select-dropdown';
 
 interface CategoryCardProps {
     id: string;
 }
+
+const countries: FieldType[] = ["text", "number", "checkbox", "date"]
+
 
 const CategoryCard = ({ id }: CategoryCardProps) => {
     const category = useSelector((s: AppState) => s.categories.byIds[id]);
@@ -21,16 +25,20 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
     const dispatch = useDispatch();
 
-    const addNewField = React.useCallback(() => {
+    // const addNewField = React.useCallback(() => {
+
+    // }, [dispatch]);
+
+    const onAddNewField = (type: FieldType) => {
         const field: Field = {
             id: uuid.v4() as string,
             category_id: id,
             name: "New Field",
-            type: "text",
+            type: type,
         }
         dispatch(addField(field));
         dispatch(addFieldRelation({ id: id, item_id: field.id }));
-    }, [dispatch]);
+    }
 
     const removeCategory = () => {
 
@@ -65,7 +73,36 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
                 )
             })}
 
-            <Button onPress={addNewField.bind(null)}>ADD NEW ITEM</Button>
+
+            <View height={10} />
+            <SelectDropdown
+                data={countries}
+                onSelect={onAddNewField.bind(null)}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem
+                }}
+                renderCustomizedButtonChild={() => {
+                    return (
+                        <View center>
+                            <Text>ADD NEW ITEM</Text>
+                        </View>
+                    )
+                }}
+                renderDropdownIcon={() => {
+                    return (
+                        <VectorIcon vector={"AntDesign"} name={'caretdown'} size={20} color={''} />
+                    )
+                }}
+                rowTextForSelection={(item, index) => {
+                    return item
+                }}
+
+                buttonStyle={{ width: "100%" }}
+            />
+
+            {/* <Button onPress={addNewField.bind(null)}>ADD NEW ITEM</Button> */}
 
         </Card>
     );

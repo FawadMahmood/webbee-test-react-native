@@ -42,11 +42,11 @@ const Field = ({ id }: FieldProps) => {
     return (
         <View marginT-3 row style={styles.container}>
             <View flex>
-                <TextInput mode="outlined" onChangeText={onChangeText.bind(null, 'name')} label={"Name"} value={attribue.value?.toString()} />
+                <TextInput mode="outlined" onChangeText={onChangeText.bind(null, 'name')} label={"Name"} value={attribue.name?.toString()} />
             </View>
 
             <View width={100} center>
-                <Text wbold black>TEXT</Text>
+                <Text vsmall wbold black>{attribue.type.toUpperCase()}</Text>
             </View>
 
             <View center width={30} >
