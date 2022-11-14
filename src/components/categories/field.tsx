@@ -5,7 +5,7 @@ import { Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { Bounceable } from 'rn-bounceable';
 import { removeFieldRelation } from '../../stores/categories/actions';
-import { deleteField } from '../../stores/fields/actions';
+import { deleteField, updateField } from '../../stores/fields/actions';
 import { theme } from '../../utils/constants';
 import VectorIcon from '../vector';
 
@@ -17,18 +17,32 @@ const Field = ({ id }: FieldProps) => {
     const dispatch = useDispatch();
     const attribue = useSelector((s: AppState) => s.fields.byIds[id]);
 
+    console.log("attribute is changing", attribue);
+
+
+
+    const update = (field: Field) => {
+        dispatch(updateField(field));
+    }
+
     const onRemoveField = () => {
         dispatch(removeFieldRelation({
             id: attribue.category_id,
             item_id: attribue.id,
         }));
+
         dispatch(deleteField(id));
+    }
+
+    const onChangeText = (key: string, value: any) => {
+        console.log("changed text", key, value);
+        update({ ...attribue, [key]: value })
     }
 
     return (
         <View marginT-3 row style={styles.container}>
             <View flex>
-                <TextInput mode="outlined" label={"Name"} value={attribue.value?.toString()} />
+                <TextInput mode="outlined" onChangeText={onChangeText.bind(null, 'name')} label={"Name"} value={attribue.value?.toString()} />
             </View>
 
             <View width={100} center>

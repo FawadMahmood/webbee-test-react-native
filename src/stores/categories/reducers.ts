@@ -34,6 +34,9 @@ const categories = (
         case REMOVE_FIELD_RELATION:
             newState.byIds[action.relation.id].fieldIds = newState.byIds[action.relation.id].fieldIds.filter(s => s !== action.relation.item_id);
             return newState;
+        case UPDATE_CATEGORY:
+            newState.byIds[action.category.id] = action.category;
+            return newState;
         default:
             return state;
     }

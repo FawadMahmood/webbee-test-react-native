@@ -20,6 +20,9 @@ const fields = (
             newState.byIds = { ...state.byIds, [action.field.id]: action.field };
             newState.allIds = [...state.allIds, action.field.id];
             return newState;
+        case UPDATE_FIELD:
+            newState.byIds[action.field.id] = action.field;
+            return newState;
         case DELETE_FIELD:
             delete newState.byIds[action.id];
             newState.allIds = newState.allIds.filter((s) => s !== action.id);
