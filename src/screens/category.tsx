@@ -61,7 +61,7 @@ const Category = ({ route }: CategoryProps) => {
 
             const attr = {
                 id: uuid.v4().toString(),
-                field_id: id,
+                field_id: _,
                 name: "New Attribute",
                 type: field.type,
                 value: getRelevantTypeDataEmptyData(field.type),

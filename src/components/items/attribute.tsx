@@ -9,7 +9,10 @@ interface AttributeProps {
 const Attribute = ({ id }: AttributeProps) => {
     const attribite = useSelector((s: AppState) => s.attributes.byIds[id]);
 
-    console.log("have this attribute", attribite);
+    const fieldIds = useSelector((s: AppState) => s.categories.byIds[attribite.category_id].fieldIds);
+
+
+    console.log("have this attribute", attribite.field_id, "fieldIds has", fieldIds);
 
     return (
         <View style={styles.container}>
