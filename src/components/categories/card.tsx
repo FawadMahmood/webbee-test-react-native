@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-native-uuid';
 import { addField } from '../../stores/fields/actions';
 import { addFieldRelation } from '../../stores/categories/actions';
-import AttributesField from './attributes';
+import AttributesField from './field';
 
 interface CategoryCardProps {
     id: string;
