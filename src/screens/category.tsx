@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../stores/items/actions';
+import { addItem, addItemAndAttributeRelation } from '../stores/items/actions';
 import uuid from 'react-native-uuid';
 import { Button } from 'react-native-paper';
 import { addItemRelation } from '../stores/categories/actions';
@@ -59,13 +59,20 @@ const Category = ({ route }: CategoryProps) => {
             const field = store.getState().fields.byIds[_];
             console.log("field we can add", field);
 
-            dispatch(addAttribute({
+            const attr = {
                 id: uuid.v4().toString(),
                 ref_id: id,
                 name: "New Attribute",
-                value: getRelevantTypeDataEmptyData(field.type)
-            }));
+                value: getRelevantTypeDataEmptyData(field.type),
+                category_id: id
+            };
 
+            dispatch(addAttribute(attr));
+
+            dispatch(addItemAndAttributeRelation({
+                id: new_item.id,
+                attrubute_id: attr.id
+            }))
 
         })
     }, [dispatch]);

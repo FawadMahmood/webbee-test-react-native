@@ -191,6 +191,7 @@ type ItemActionTypes_U = (AddItem & AddAttributeRelation)
 type Attribute = {
     id: string;
     ref_id: string;
+    category_id: string;
     name?: string;
     value?: boolean | string | number | Date;
 }
