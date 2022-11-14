@@ -40,7 +40,7 @@ const CategoryItem = ({ id }: CategoryItemProps) => {
                 />
             </View>
 
-            <View center width={100} marginT-6 height={"85%"} marginR-5 style={styles.border}>
+            <View center width={100} marginT-6 height={"98%"} marginR-5 style={styles.border}>
                 <Text vsmall wbold>{item.type.toUpperCase()}</Text>
             </View>
 

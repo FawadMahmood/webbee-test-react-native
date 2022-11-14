@@ -1,16 +1,21 @@
 import { FlashList } from '@shopify/flash-list';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { View } from 'react-native-ui-lib';
+import { Button, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { Category } from '../components';
 import { store } from '../stores';
+import { addCategory } from '../stores/categories/actions';
+import uuid from 'react-native-uuid';
+import { useColumns } from '../utils/columns';
 
 
 interface ManageCategoriesProps { }
 
 const ManageCategories = (props: ManageCategoriesProps) => {
     const dispatch = useDispatch();
+    const columns = useColumns();
+
     const categories = store.getState().categories;
 
     // to make sure whole list updates when length of categories changes
@@ -25,14 +30,25 @@ const ManageCategories = (props: ManageCategoriesProps) => {
         )
     }
 
+    const addNewCategory = React.useCallback(() => {
+        const new_category: Category = {
+            id: uuid.v4().toString(),
+            name: "New Category"
+        }
+        dispatch(addCategory(new_category));
+    }, [dispatch]);
+
 
     return (
         <View padding-10 flex spread bg-white>
             <FlashList
+                numColumns={columns}
                 data={categories}
                 renderItem={renderItem.bind(null)}
                 estimatedItemSize={200}
             />
+
+            <Button onPress={addNewCategory} bg-black label="ADD NEW CATEGORY" />
         </View>
     );
 };

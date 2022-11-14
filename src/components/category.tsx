@@ -13,6 +13,7 @@ import { Divider } from 'react-native-paper';
 import Field from './core-ui/field';
 import Form from './core-ui/form';
 import CategoryItems from './category_items';
+import { useColumns } from '../utils/columns';
 
 interface CategoryProps {
     id: string;
@@ -20,6 +21,8 @@ interface CategoryProps {
 
 const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & PaddingModifiers) => {
     const dispatch = useDispatch();
+
+
     const item = useSelector((s: AppState) => s.categories.find((s) => s.id === id)) as Category;
 
     const removeCategory = () => {
@@ -49,7 +52,7 @@ const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & Paddin
             <Form
                 onTextChanged={onTextChanged.bind(null)}
                 fields={[
-                    <Field label="Name" value={item.name} _key={'name'} />
+                    <Field key={'field_text'} label="Name" value={item.name} _key={'name'} />
                 ]}
             />
 

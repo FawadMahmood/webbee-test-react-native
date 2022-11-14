@@ -7,6 +7,7 @@ import CategoryItem from './item';
 import uuid from 'react-native-uuid';
 import SelectDropdown from 'react-native-select-dropdown'
 import VectorIcon from './vector';
+import { If } from '@kanzitelli/if-component';
 
 interface CategoryItemsProps {
     id: string;
@@ -28,15 +29,30 @@ const CategoryItems = ({ id }: CategoryItemsProps) => {
         dispatch(addField(field));
     }
 
+    const _fields = (
+        <React.Fragment>
+            {fields.map((_) => {
+                return (
+                    <CategoryItem key={_.id + 'item'} id={_.id} />
+                )
+            })}
+        </React.Fragment>
+    );
+
     return (
         <View marginV-10>
             <Text blue small marginB-5>Items</Text>
 
-            {fields && fields.map((_) => {
-                return (
-                    <CategoryItem key={_.id} id={_.id} />
-                )
-            })}
+            <If
+                _={fields.length === 0}
+                _then={
+                    <Text>No More Items</Text>
+                }
+                _else={_fields}
+            />
+
+            <Text blue small marginV-10>Actions</Text>
+
 
             <SelectDropdown
                 data={countries}
@@ -48,7 +64,7 @@ const CategoryItems = ({ id }: CategoryItemsProps) => {
                 }}
                 renderCustomizedButtonChild={() => {
                     return (
-                        <View>
+                        <View center>
                             <Text>ADD NEW ITEM</Text>
                         </View>
                     )
@@ -59,14 +75,12 @@ const CategoryItems = ({ id }: CategoryItemsProps) => {
                     )
                 }}
                 rowTextForSelection={(item, index) => {
-                    // text represented for each item in dropdown
-                    // if data array is an array of objects then return item.property to represent item in dropdown
                     return item
                 }}
 
+                buttonStyle={{ width: "100%" }}
             />
 
-            {/* <Button onPress={onAddNewItem.bind(null)}>ADD NEW ITEM</Button> */}
         </View>
     );
 };
