@@ -25,15 +25,9 @@ const Attribute = ({ id }: AttributeProps) => {
             dispatch(deleteAttribute(attribite.id));
         }
 
+
+
     }, [isExist])
-
-    // if (isExist === undefined && attribite) {
-
-    //     dispatch(deleteAttribute(attribite.id));
-
-    //     return null;
-    // }
-
 
     console.log("have this attribute", attribite.field_id, "fieldIds has", fieldIds.find(s => s === attribite.field_id), isExist);
 

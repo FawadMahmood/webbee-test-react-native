@@ -9,6 +9,7 @@ import { addItemRelation } from '../stores/categories/actions';
 import { ItemCard } from '../components';
 import { store } from '../stores';
 import { addAttribute } from '../stores/attributes/actions';
+import { getRelevantTypeDataEmptyData } from '../utils/help';
 
 interface CategoryProps {
     route: { params: { id: string } }
@@ -23,27 +24,6 @@ const Category = ({ route }: CategoryProps) => {
     const itemIds = useSelector((s: AppState) => s.categories.byIds[id].itemIds)
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[id].fieldIds)
 
-
-
-    console.log("this category page got", fieldIds);
-
-    const getRelevantTypeDataEmptyData = (type: FieldType) => {
-        switch (type) {
-            case "checkbox":
-                return false
-            case "date":
-                return new Date();
-            case "number":
-                return 0;
-            case "text":
-                return "";
-        }
-    }
-
-
-    // const items = store.getState().items.filter(s => s.category_id === id); ///useSelector((s: AppState) => s.items.filter(s => s.category_id === id))
-    // useSelector((s: AppState) => s.items.length);
-    // const fields = useSelector((s: AppState) => s.fields.filter((x) => x.category_id === id));
 
     const addNewItem = React.useCallback(() => {
         const new_item: Item = {
