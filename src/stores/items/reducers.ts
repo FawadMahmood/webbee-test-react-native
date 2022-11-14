@@ -1,5 +1,5 @@
 import {
-    ADD_ITEM, UPDATE_ITEM
+    ADD_ITEM, ADD_ITEM_ATTRIBUTE_RELATION, UPDATE_ITEM
 } from './actions';
 
 const initialState: ItemState = {
@@ -38,6 +38,9 @@ const fields = (
         //             newState[i] = action.item;
         //         }
         //     })
+        case ADD_ITEM_ATTRIBUTE_RELATION:
+            newState.byIds[action.relation.id].attributeIds = [...newState.byIds[action.relation.id].attributeIds, action.relation.attrubute_id]
+            return newState;
         default:
             return state;
     }

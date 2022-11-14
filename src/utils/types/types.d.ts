@@ -162,7 +162,7 @@ type Item = {
     id: string;
     category_id: string;
     name?: string;
-    attributeIds: []
+    attributeIds: string[]
 }
 
 
@@ -180,7 +180,7 @@ interface AddItem {
     item: Item
 }
 
-type ItemActionTypes_U = (AddItem)
+type ItemActionTypes_U = (AddItem & AddAttributeRelation)
 
 // item type
 
@@ -210,7 +210,17 @@ interface AddAttribute {
     attribute: Attribute
 }
 
-type AttributeActionTypes_U = (AddAttribute)
+type AttributeRelation = {
+    id: string;
+    attrubute_id: string;
+}
+
+type AddAttributeRelation = {
+    type: string;
+    relation: AttributeRelation;
+}
+
+type AttributeActionTypes_U = (AddAttribute | AddAttributeRelation)
 
 
 //attribbute type

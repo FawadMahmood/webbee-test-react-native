@@ -1,6 +1,8 @@
 export const ADD_ITEM = 'ADD_NEW_ITEM';
 export const UPDATE_ITEM = "UPDATE_ITEM"
 export const DELETE_ITEM = "DELETE_ITEM"
+export const ADD_ITEM_ATTRIBUTE_RELATION = "ADD_ITEM_ATTRIBUTE_RELATION"
+
 
 
 export const addItem = (
@@ -10,6 +12,13 @@ export const addItem = (
     item,
 });
 
+
+export const addItemAndAttributeRelation = (
+    relation: AttributeRelation,
+): AddAttributeRelation => ({
+    type: ADD_ITEM_ATTRIBUTE_RELATION,
+    relation,
+});
 
 
 export const updateItem = (
