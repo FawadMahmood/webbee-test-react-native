@@ -9,7 +9,6 @@ const initialState: FieldState = {
     allIds: [],
 }
 
-
 const fields = (
     state = initialState,
     action: FieldsActionTypes_U,
@@ -22,24 +21,10 @@ const fields = (
             newState.allIds = [...state.allIds, action.field.id];
             console.log("state is now", newState.allIds.length, Object.entries(newState.byIds).length);
             return newState;
-        // case ADD_FIELD:
-        //     if (!state.find((sr) => sr.id === action.field.id)) {
-        //         return [
-        //             ...state,
-        //             action.field
-        //         ];
-        //     }
-        //     return state;
-        // case UPDATE_FIELD:
-        //     newState = [...state];
-        //     newState.map((_, i) => {
-        //         if (_.id === action.field.id) {
-        //             newState[i] = action.field;
-        //         }
-        //     })
-        //     return newState;
-        // case DELETE_FIELD:
-        //     return [...state.filter((s) => s.id !== action.id)];
+        case DELETE_FIELD:
+            delete newState.byIds[action.field.id];
+            newState.allIds = newState.allIds.filter((s) => s !== action.field.id);
+            return newState;
         default:
             return state;
     }
