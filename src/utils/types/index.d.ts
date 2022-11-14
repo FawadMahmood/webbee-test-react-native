@@ -57,3 +57,21 @@ type CategoriesActionTypes_U = (AddCategory & DeleteCategory); // Union Types
 interface AppState {
   categories: Category[];
 }
+
+interface IconProps {
+  vector: icon_vector;
+  name: string;
+  size: number;
+  color: string;
+  style?: StyleProp<TextStyle>;
+  onPress?: () => void | undefined
+}
+
+// handleChange,handleBlur,handleSubmit,values
+interface FormElement {
+  handleChange?: (key: string, value: any) => void;
+  handleBlur?: (key: string) => void;
+  handleSubmit?: () => void;
+  values: any;
+  setFieldValue: (key: string, value: any) => void;
+}
