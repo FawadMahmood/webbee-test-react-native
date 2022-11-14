@@ -15,7 +15,6 @@ interface ManageCategoriesProps { }
 const ManageCategories = (props: ManageCategoriesProps) => {
     const catIds = useSelector((s: AppState) => s.categories.allIds);
 
-    console.log(catIds);
 
     const dispatch = useDispatch();
     const columns = useColumns();

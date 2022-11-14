@@ -15,13 +15,10 @@ interface ItemProps {
 }
 
 const Item = ({ item }: ItemProps) => {
-    // console.log('item updating', it);
-
     const dispatch = useDispatch();
 
 
     const update = (item: Item) => {
-        console.log("yopdating");
         dispatch(updateItem(item));
     }
 

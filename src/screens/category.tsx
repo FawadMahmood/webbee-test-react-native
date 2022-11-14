@@ -57,7 +57,6 @@ const Category = ({ route }: CategoryProps) => {
 
         fieldIds.map((_, i) => {
             const field = store.getState().fields.byIds[_];
-            console.log("field we can add", field);
 
             const attr = {
                 id: uuid.v4().toString(),

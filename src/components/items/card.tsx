@@ -13,9 +13,6 @@ const ItemCard = ({ id }: ItemCardProps) => {
     const item = useSelector((e: AppState) => e.items.byIds[id]);
     const attributeIds = useSelector((e: AppState) => e.items.byIds[id].attributeIds);
 
-
-    console.log("item I got", attributeIds);
-
     return (
         <View style={styles.container}>
             <Text>ItemCard</Text>

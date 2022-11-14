@@ -28,10 +28,6 @@ export class NavService implements IService {
     if (!!prevName && !!currentName) {
       const params = { to: currentName, from: prevName };
 
-      // send some statistics
-      // facebook.event('ScreenOpen', params);
-      // yandex.event('ScreenOpen', params);
-      console.log('onStateChange:', JSON.stringify(params, null, 2));
     }
 
     this.r = currentName;

@@ -17,7 +17,6 @@ const fields = (
         case ADD_NEW_ATTRIBUTE:
             newState.byIds = { ...state.byIds, [action.attribute.id]: { ...action.attribute } };
             newState.allIds = [...state.allIds, action.attribute.id];
-            console.log("state is now", newState.allIds.length, Object.entries(newState.byIds).length);
             return newState;
         case DELETE_ATTRIBUTE:
             delete newState.byIds[action.id];

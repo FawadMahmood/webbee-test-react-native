@@ -1,6 +1,5 @@
-import { REMOVE_FIELD_RELATION } from '../categories/actions';
 import {
-    ADD_ITEM, ADD_ITEM_ATTRIBUTE_RELATION, UPDATE_ITEM
+    ADD_ITEM, ADD_ITEM_ATTRIBUTE_RELATION, REMOVE_ITEM_ATTRIBUTE_RELATION
 } from './actions';
 
 const initialState: ItemState = {
@@ -20,13 +19,16 @@ const fields = (
         case ADD_ITEM:
             newState.byIds = { ...state.byIds, [action.item.id]: { ...action.item } };
             newState.allIds = [...state.allIds, action.item.id];
-            console.log("state is now", newState.allIds.length, Object.entries(newState.byIds).length);
             return newState;
         case ADD_ITEM_ATTRIBUTE_RELATION:
             newState.byIds[action.relation.id].attributeIds = [...newState.byIds[action.relation.id].attributeIds, action.relation.attrubute_id]
             return newState;
-        case REMOVE_FIELD_RELATION:
-            newState.byIds[action.relation.id].attributeIds = newState.byIds[action.relation.id].attributeIds.filter(s => s !== action.relation.attrubute_id)
+        case REMOVE_ITEM_ATTRIBUTE_RELATION:
+            console.log("UPPER WALA LOG", newState.byIds[action.relation.id],);
+
+            console.log(REMOVE_ITEM_ATTRIBUTE_RELATION, newState.byIds[action.relation.id]);
+
+            // newState.byIds[action.relation.id].attributeIds = newState.byIds[action.relation.id].attributeIds.filter(s => s !== action.relation.attrubute_id)
             return newState;
         default:
             return state;

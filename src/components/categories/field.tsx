@@ -13,8 +13,6 @@ const Field = ({ id }: FieldProps) => {
     const dispatch = useDispatch();
     const attribue = useSelector((s: AppState) => s.fields.byIds[id]);
 
-    console.log("all attribues are here", attribue);
-
     const onRemoveField = () => {
         dispatch(removeFieldRelation({
             id: attribue.category_id,
