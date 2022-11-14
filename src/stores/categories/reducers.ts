@@ -50,6 +50,7 @@ const categories = (
             newState.byIds[action.relation.id].itemIds = [...newState.byIds[action.relation.id].itemIds, action.relation.item_id]
             return newState;
         case REMOVE_FIELD_RELATION:
+            console.log("REMOVE_FIELD_RELATION", action);
             newState.byIds[action.relation.id].fieldIds = newState.byIds[action.relation.id].fieldIds.filter(s => s !== action.relation.item_id);
             return newState;
         default:

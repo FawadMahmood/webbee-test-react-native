@@ -210,6 +210,11 @@ interface AddAttribute {
     attribute: Attribute
 }
 
+interface DeleteAttribute {
+    type: string;
+    id: string
+}
+
 type AttributeRelation = {
     id: string;
     attrubute_id: string;
@@ -220,7 +225,7 @@ type AddAttributeRelation = {
     relation: AttributeRelation;
 }
 
-type AttributeActionTypes_U = (AddAttribute | AddAttributeRelation)
+type AttributeActionTypes_U = (AddAttribute & AddAttributeRelation & DeleteAttribute)
 
 
 //attribbute type

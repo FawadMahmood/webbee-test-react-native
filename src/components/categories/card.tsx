@@ -18,20 +18,16 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
     const dispatch = useDispatch();
 
-
-    console.log("categories field ids got", fieldIds);
-
     const addNewField = React.useCallback(() => {
         const field: Field = {
             id: uuid.v4() as string,
             category_id: id,
+            name: "New Field",
             type: "text",
         }
         dispatch(addField(field));
         dispatch(addFieldRelation({ id: id, item_id: field.id }));
     }, [dispatch]);
-
-
 
 
     return (

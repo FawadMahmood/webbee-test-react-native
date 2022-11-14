@@ -11,6 +11,13 @@ export const addAttribute = (
 });
 
 
+export const deleteAttribute = (
+    id: string,
+): DeleteAttribute => ({
+    type: DELETE_ATTRIBUTE,
+    id,
+});
+
 
 // export const updateItem = (
 //     item: Item,

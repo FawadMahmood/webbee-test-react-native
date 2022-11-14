@@ -1,3 +1,4 @@
+import { REMOVE_FIELD_RELATION } from '../categories/actions';
 import {
     ADD_ITEM, ADD_ITEM_ATTRIBUTE_RELATION, UPDATE_ITEM
 } from './actions';
@@ -21,25 +22,11 @@ const fields = (
             newState.allIds = [...state.allIds, action.item.id];
             console.log("state is now", newState.allIds.length, Object.entries(newState.byIds).length);
             return newState;
-        // case ADD_ITEM:
-        //     if (!(state.find((sr) => sr.id === action.item.id))) {
-        //         return [
-        //             ...state,
-        //             action.item
-        //         ];
-        //     }
-        //     return state;
-        // case UPDATE_ITEM:
-        //     console.log("update came to item", action.item);
-
-        //     newState = [...state];
-        //     newState.map((_, i) => {
-        //         if (_.id === action.item.id) {
-        //             newState[i] = action.item;
-        //         }
-        //     })
         case ADD_ITEM_ATTRIBUTE_RELATION:
             newState.byIds[action.relation.id].attributeIds = [...newState.byIds[action.relation.id].attributeIds, action.relation.attrubute_id]
+            return newState;
+        case REMOVE_FIELD_RELATION:
+            newState.byIds[action.relation.id].attributeIds = newState.byIds[action.relation.id].attributeIds.filter(s => s !== action.relation.attrubute_id)
             return newState;
         default:
             return state;

@@ -1,5 +1,5 @@
 import {
-    ADD_NEW_ATTRIBUTE, UPDATE_ATTRIBUTE
+    ADD_NEW_ATTRIBUTE, DELETE_ATTRIBUTE, UPDATE_ATTRIBUTE
 } from './actions';
 
 const initialState: AttributeState = {
@@ -18,6 +18,10 @@ const fields = (
             newState.byIds = { ...state.byIds, [action.attribute.id]: { ...action.attribute } };
             newState.allIds = [...state.allIds, action.attribute.id];
             console.log("state is now", newState.allIds.length, Object.entries(newState.byIds).length);
+            return newState;
+        case DELETE_ATTRIBUTE:
+            delete newState.byIds[action.id];
+            newState.allIds = newState.allIds.filter(s => s !== action.id);
             return newState;
         default:
             return state;

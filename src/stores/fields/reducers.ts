@@ -22,8 +22,8 @@ const fields = (
             console.log("state is now", newState.allIds.length, Object.entries(newState.byIds).length);
             return newState;
         case DELETE_FIELD:
-            delete newState.byIds[action.field.id];
-            newState.allIds = newState.allIds.filter((s) => s !== action.field.id);
+            delete newState.byIds[action.id];
+            newState.allIds = newState.allIds.filter((s) => s !== action.id);
             return newState;
         default:
             return state;
