@@ -72,9 +72,37 @@ type Field = {
     value?: string | number | typeof Date
 }
 
+
+interface FieldNormalized {
+    [key: string]: Field
+}
+
+interface FieldState {
+    byIds: FieldNormalized;
+    allIds: string[];
+}
+
+
+interface CategoryNormalized {
+    [key: string]: Category
+}
+
+// type NumberIndexed<T> = { [index: number]: T };
+
+interface CategoryState {
+    byIds: CategoryNormalized;
+    allIds: string[];
+}
+
 type Category = {
     id: string;
     name?: string;
+    fieldIds: string[];
+}
+
+type CategoryItemRelation = {
+    id: string;
+    item_id: string;
 }
 
 type Item = {
@@ -87,6 +115,11 @@ type Item = {
 interface AddCategory {
     type: string;
     category: Category
+}
+
+interface AddCategoryItemRelation {
+    type: string;
+    relation: CategoryItemRelation
 }
 
 interface AddField {
@@ -114,12 +147,12 @@ interface DeleteField {
 
 type FieldsActionTypes_U = (AddField & DeleteField)
 
-type CategoriesActionTypes_U = (AddCategory & DeleteCategory); // Union Types
+type CategoriesActionTypes_U = (AddCategory & DeleteCategory & AddCategoryItemRelation); // Union Types
 
 
 interface AppState {
-    categories: Category[];
-    fields: Field[];
+    categories: CategoryState;
+    fields: FieldState;
     items: Item[]
 }
 

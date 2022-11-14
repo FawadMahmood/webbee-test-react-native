@@ -29,14 +29,15 @@ interface RootNavigationProps { }
 
 const RootNavigation = (props: RootNavigationProps) => {
 
-  const categories = useSelector((s: AppState) => s.categories);
+  const categories = useSelector((s: AppState) => s.categories.allIds);
 
   return (
     <Drawer.Navigator initialRouteName="Dashboard">
       <Drawer.Screen name="dashboard" component={Dashboard} options={{ title: "Dashboard" }} />
       {categories && categories.map((_) => {
+        const name = store.getState().categories.byIds[_].name;
         return (
-          <Drawer.Screen key={_.id + 'drawer_item'} name={_.id} component={Category as any} initialParams={{ id: _.id }} options={{ title: _.name }} />
+          <Drawer.Screen key={_ + "drawer_item"} name={_} component={Category as any} initialParams={{ id: _ }} options={{ title: name }} />
         )
       })}
       <Drawer.Screen name="manage" component={ManageCategories} options={{ title: "Manage Categories" }} />

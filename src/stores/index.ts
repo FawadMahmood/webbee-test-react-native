@@ -12,6 +12,7 @@ const persistConfig = {
     key: 'rootKeyPersist',
     storage: reduxStorage,
 };
+
 const persistedReducer = persistReducer(persistConfig, reducer);
 
 const sagaMiddleware = createSagaMiddleware();
