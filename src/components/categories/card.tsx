@@ -5,7 +5,7 @@ import { Card, Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-native-uuid';
 import { addField } from '../../stores/fields/actions';
-import { addFieldRelation, updateCategory } from '../../stores/categories/actions';
+import { addFieldRelation, deleteCategory, updateCategory } from '../../stores/categories/actions';
 import AttributesField from './field';
 import { Bounceable } from 'rn-bounceable';
 import { VectorIcon } from '../../components';
@@ -41,7 +41,7 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
     }
 
     const removeCategory = () => {
-
+        dispatch(deleteCategory(id));
     }
 
     const update = (field: Category) => {

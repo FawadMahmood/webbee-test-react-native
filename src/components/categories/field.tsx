@@ -17,10 +17,6 @@ const Field = ({ id }: FieldProps) => {
     const dispatch = useDispatch();
     const attribue = useSelector((s: AppState) => s.fields.byIds[id]);
 
-    console.log("attribute is changing", attribue);
-
-
-
     const update = (field: Field) => {
         dispatch(updateField(field));
     }
