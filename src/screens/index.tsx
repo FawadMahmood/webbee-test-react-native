@@ -7,6 +7,8 @@ import { Text, View } from 'react-native-ui-lib';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ManageCategories from './manage';
 import Category from './category';
+import { useSelector } from 'react-redux';
+import { store } from '../stores';
 
 
 const Drawer = createDrawerNavigator();
@@ -25,16 +27,27 @@ export type ScreenProps = {
 
 interface RootNavigationProps { }
 
-
-// const Stack = createNativeStackNavigator();
-
-
 const RootNavigation = (props: RootNavigationProps) => {
+
+  const categories = store.getState().categories;
+
+  // to make sure whole list updates when length of categories changes
+  // might help prevent render count for the whole screen
+  useSelector((s: AppState) => s.categories.length);
+  // might help prevent render count for the whole screen
+  // to make sure whole list updates when length of categories changes
+
+
+
   return (
     <Drawer.Navigator initialRouteName="Dashboard">
       <Drawer.Screen name="dashboard" component={Dashboard} options={{ title: "Dashboard" }} />
+      {categories && categories.map((_) => {
+        return (
+          <Drawer.Screen key={_.id + 'drawer_item'} name={_.id} component={Category} initialParams={{ id: _.id }} options={{ title: _.name }} />
+        )
+      })}
       <Drawer.Screen name="manage" component={ManageCategories} options={{ title: "Manage Categories" }} />
-      <Drawer.Screen name="category" component={Category} options={{ title: "Manage Categories" }} />
     </Drawer.Navigator>
   );
 };

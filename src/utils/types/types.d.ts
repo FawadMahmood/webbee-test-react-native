@@ -75,7 +75,12 @@ type Field = {
 type Category = {
     id: string;
     name?: string;
-    fields?: Field[]
+}
+
+type Item = {
+    id: string;
+    category_id: string;
+    name?: string;
 }
 
 interface AddCategory {
@@ -86,6 +91,11 @@ interface AddCategory {
 interface AddField {
     type: string;
     field: Field
+}
+
+interface AddItem {
+    type: string;
+    item: Item
 }
 
 interface DeleteCategory {
