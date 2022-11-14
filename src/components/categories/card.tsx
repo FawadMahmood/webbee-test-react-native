@@ -22,18 +22,13 @@ const countries: FieldType[] = ["text", "number", "checkbox", "date"]
 const CategoryCard = ({ id }: CategoryCardProps) => {
     const category = useSelector((s: AppState) => s.categories.byIds[id]);
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[id].fieldIds);
-
     const dispatch = useDispatch();
-
-    // const addNewField = React.useCallback(() => {
-
-    // }, [dispatch]);
 
     const onAddNewField = (type: FieldType) => {
         const field: Field = {
             id: uuid.v4() as string,
             category_id: id,
-            name: "New Field",
+            name: "",
             type: type,
         }
         dispatch(addField(field));
