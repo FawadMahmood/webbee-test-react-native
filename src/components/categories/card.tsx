@@ -5,7 +5,7 @@ import { Card, Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-native-uuid';
 import { addField } from '../../stores/fields/actions';
-import { addFieldRelation } from '../../stores/categories/actions';
+import { addFieldRelation, updateCategory } from '../../stores/categories/actions';
 import AttributesField from './field';
 import { Bounceable } from 'rn-bounceable';
 import { VectorIcon } from '../../components';
@@ -36,6 +36,14 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
     }
 
+    const update = (field: Category) => {
+        dispatch(updateCategory(field));
+    }
+
+
+    const onChangeText = (key: string, value: any) => {
+        update({ ...category, [key]: value })
+    }
 
     return (
         <Card width={'96%'} marginV-5 padding-15 style={[styles.container]}>
@@ -49,8 +57,7 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
             <Divider />
 
-            <TextInput mode="outlined" label={"Name"} value={category.name} />
-
+            <TextInput mode="outlined" label={"Name"} onChangeText={onChangeText.bind(null, 'name')} value={category.name} />
 
             {fieldIds && fieldIds.map((_, i) => {
                 return (
