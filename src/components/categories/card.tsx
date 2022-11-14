@@ -57,6 +57,9 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
                     <AttributesField key={_ + 'attribute'} id={_} />
                 )
             })}
+
+            <Button onPress={addNewField.bind(null)}>ADD NEW ITEM</Button>
+
         </Card>
     );
 };
