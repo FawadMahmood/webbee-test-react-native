@@ -31,8 +31,10 @@ type ThemeColors = {
 type FieldType = "text" | "number" | "date" | "checkbox"
 
 type Field = {
+  id: string;
   name?: string;
-  type: FieldType
+  type: FieldType;
+  value?: string | number | typeof Date
 }
 
 type Category = {

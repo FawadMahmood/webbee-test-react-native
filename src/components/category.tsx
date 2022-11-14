@@ -11,6 +11,7 @@ import { Bounceable } from 'rn-bounceable';
 import { Button, Divider, TextInput } from 'react-native-paper';
 import Field from './core-ui/field';
 import Form from './core-ui/form';
+import { uniqueId } from 'lodash';
 
 interface CategoryProps {
     id: string;
@@ -55,7 +56,7 @@ const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & Paddin
     }
 
     const onAddNewItem = () => {
-        const fields = (item.fields ? [...item.fields, { name: "", type: "text" }] : [{ name: "", type: "text" }]) as Field[]
+        const fields = (item.fields ? [...item.fields, { id: uniqueId(), name: "", type: "text" }] : [{ id: uniqueId(), name: "", type: "text" }]) as Field[]
         update({ ...item, fields: fields })
     }
 
