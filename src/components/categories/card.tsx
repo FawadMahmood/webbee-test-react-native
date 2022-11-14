@@ -11,6 +11,8 @@ import { Bounceable } from 'rn-bounceable';
 import { VectorIcon } from '../../components';
 import { theme } from '../../utils/constants';
 import SelectDropdown from 'react-native-select-dropdown';
+import RNPickerSelect from 'react-native-picker-select';
+
 
 interface CategoryCardProps {
     id: string;
@@ -73,9 +75,19 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
             <View height={10} />
 
+            <RNPickerSelect
+                onValueChange={(value) => console.log(value)}
+                items={[
+                    { label: 'Football', value: 'football' },
+                    { label: 'Baseball', value: 'baseball' },
+                    { label: 'Hockey', value: 'hockey' },
+                ]}
+            />
 
 
-            <SelectDropdown
+
+
+            {/* <SelectDropdown
                 data={selection}
                 onSelect={onAddNewField.bind(null)}
                 buttonTextAfterSelection={(selectedItem, index) => {
@@ -129,7 +141,7 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
                 }}
 
                 buttonStyle={{ width: "100%" }}
-            />
+            /> */}
 
 
 
