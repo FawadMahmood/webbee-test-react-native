@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native-ui-lib';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Bounceable } from 'rn-bounceable';
 import { VectorIcon } from '.';
+import { deleteField, updateField } from '../store/fields/actions';
 import { theme } from '../utils/constants';
 import Field from './core-ui/field';
 import Form from './core-ui/form';
@@ -13,20 +14,19 @@ interface CategoryItemProps {
 }
 
 const CategoryItem = ({ id }: CategoryItemProps) => {
-    const item = useSelector((s: AppState) => s.fields.filter((x) => x.id === id)[0]) as Field;
+    const dispatch = useDispatch();
+    const item = useSelector((s: AppState) => s.fields.find((x) => x.id === id)) as Field;
 
+    const removeField = () => {
+        dispatch(deleteField(item.id))
+    }
 
-
-    console.log("item we got", item);
-
-
-    const removeCategory = () => {
-
+    const update = (item: Field) => {
+        dispatch(updateField(item));
     }
 
     const onTextChanged = (key: string, value: string) => {
-        console.log("onTextChanged", key, value);
-
+        update({ ...item, [key]: value });
     }
 
     return (
@@ -45,7 +45,7 @@ const CategoryItem = ({ id }: CategoryItemProps) => {
             </View>
 
             <View center width={30} marginT-7 height={"80%"}>
-                <Bounceable onPress={removeCategory.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
+                <Bounceable onPress={removeField.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
                     <VectorIcon vector={"Octicons"} name="trash" color={theme.color.red} size={20} />
                 </Bounceable>
             </View>

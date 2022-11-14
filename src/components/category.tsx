@@ -30,33 +30,6 @@ const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & Paddin
         dispatch(updateCategory(item));
     }
 
-    // const customField = (field: Field, props: any) => {
-    //     return (
-    //         <View row spread marginV-5 height={60}>
-    //             <View flex marginR-5>
-    //                 <Field label="Field" value={field.value} _key={'name'} {...props} />
-    //             </View>
-    //             <View center width={100} marginT-6 height={"85%"} marginR-5 style={styles.border}>
-    //                 <Text>TEXT</Text>
-    //             </View>
-    //             <View center width={30} marginT-7 height={"80%"}>
-    // <Bounceable onPress={removeCategory.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
-    //     <VectorIcon vector={"Octicons"} name="trash" color={theme.color.red} size={20} />
-    // </Bounceable>
-    //             </View>
-    //         </View>
-    //     )
-    // }
-
-    const onSubmitForm = (form: object) => {
-        update({ ...item, ...form })
-    }
-
-    const onAddNewItem = () => {
-        const fields = (item.fields ? [...item.fields, { id: uniqueId(), name: "", type: "text" }] : [{ id: uniqueId(), name: "", type: "text" }]) as Field[]
-        update({ ...item, fields: fields })
-    }
-
     const onTextChanged = (key: string, value: string) => {
         update({ ...item, [key]: value });
     }

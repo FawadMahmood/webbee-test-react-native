@@ -59,7 +59,12 @@ interface DeleteCategory {
   id: string
 }
 
-type FieldsActionTypes_U = (AddField)
+interface DeleteField {
+  type: string;
+  id: string
+}
+
+type FieldsActionTypes_U = (AddField & DeleteField)
 
 type CategoriesActionTypes_U = (AddCategory & DeleteCategory); // Union Types
 

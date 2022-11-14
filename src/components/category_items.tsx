@@ -6,6 +6,7 @@ import { Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { addField } from '../store/fields/actions';
 import CategoryItem from './item';
+import uuid from 'react-native-uuid';
 
 interface CategoryItemsProps {
     id: string;
@@ -19,7 +20,7 @@ const CategoryItems = ({ id }: CategoryItemsProps) => {
 
     const onAddNewItem = () => {
         const field: Field = {
-            id: uniqueId(),
+            id: uuid.v4() as string,
             category_id: id,
             type: "text"
         }
@@ -32,7 +33,7 @@ const CategoryItems = ({ id }: CategoryItemsProps) => {
 
             {fields && fields.map((_) => {
                 return (
-                    <CategoryItem id={_.id} />
+                    <CategoryItem key={_.id} id={_.id} />
                 )
             })}
 
