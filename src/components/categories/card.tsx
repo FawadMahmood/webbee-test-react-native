@@ -24,6 +24,8 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[id].fieldIds);
     const dispatch = useDispatch();
 
+    const selection = Object.keys(category).filter(e => (e !== "fieldIds" && e !== "itemIds" && e !== "id"));
+
     const onAddNewField = (type: FieldType) => {
         const field: Field = {
             id: uuid.v4() as string,
@@ -70,6 +72,38 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
 
             <View height={10} />
+
+
+
+            <SelectDropdown
+                data={selection}
+                onSelect={onAddNewField.bind(null)}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem
+                }}
+                renderCustomizedButtonChild={() => {
+                    return (
+                        <View center>
+                            <Text>SELECT AS TITLE</Text>
+                        </View>
+                    )
+                }}
+                renderDropdownIcon={() => {
+                    return (
+                        <VectorIcon vector={"AntDesign"} name={'caretdown'} size={20} color={''} />
+                    )
+                }}
+                rowTextForSelection={(item, index) => {
+                    return item
+                }}
+
+                buttonStyle={{ width: "100%" }}
+            />
+            <View height={10} />
+
+
             <SelectDropdown
                 data={countries}
                 onSelect={onAddNewField.bind(null)}
@@ -96,6 +130,8 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
                 buttonStyle={{ width: "100%" }}
             />
+
+
 
             {/* <Button onPress={addNewField.bind(null)}>ADD NEW ITEM</Button> */}
 
