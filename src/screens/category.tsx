@@ -77,12 +77,6 @@ const Category = ({ route }: CategoryProps) => {
         })
     }, [dispatch, fieldIds]);
 
-    // const renderItem = ({ item }: { item: Item, index: number }) => {
-    //     return (
-    //         <Item item={item} marginV-20 />
-    //     )
-    // }
-
     return (
         <View flex padding-15>
             <View row spread>
@@ -96,23 +90,6 @@ const Category = ({ route }: CategoryProps) => {
                     <ItemCard key={_ + 'item_card'} id={_} />
                 )
             })}
-
-
-            {/* <View height={30} spread row centerV>
-                <Text black wbold small>{category?.name}</Text>
-                <Bounceable onPress={addNewItem.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
-                    <VectorIcon vector={"AntDesign"} name="plus" color={theme.color.blue} size={20} />
-                    <Text> Add New Item</Text>
-                </Bounceable>
-            </View>
-
-            <FlashList
-                numColumns={columns}
-                data={items}
-                renderItem={renderItem.bind(null)}
-                estimatedItemSize={200}
-                contentContainerStyle={styles.contentContainerStyle}
-            /> */}
 
         </View>
     );

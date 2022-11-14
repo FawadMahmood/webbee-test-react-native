@@ -22,6 +22,7 @@ const Attribute = ({ id }: AttributeProps) => {
                 id: attribite.item_id,
                 attrubute_id: attribite.id
             }));
+            dispatch(deleteAttribute(attribite.id));
         }
 
     }, [isExist])

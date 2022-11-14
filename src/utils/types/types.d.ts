@@ -120,6 +120,7 @@ type Category = {
     name?: string;
     fieldIds: string[];
     itemIds: string[]
+    nameKey?: string;
 }
 
 type CategoryRelation = {

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
+import { View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFieldRelation } from '../../stores/categories/actions';
 import { deleteField } from '../../stores/fields/actions';
@@ -23,9 +24,12 @@ const Field = ({ id }: FieldProps) => {
 
     return (
         <View style={styles.container}>
-            <Text>{attribue.name}</Text>
 
-            <Button onPress={onRemoveField.bind(null)}>REMOVE</Button>
+
+
+            {/* <Text>{attribue.name}</Text>
+
+            <Button onPress={onRemoveField.bind(null)}>REMOVE</Button> */}
         </View>
     );
 };

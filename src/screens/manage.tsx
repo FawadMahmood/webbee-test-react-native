@@ -19,30 +19,6 @@ const ManageCategories = (props: ManageCategoriesProps) => {
     const dispatch = useDispatch();
     const columns = useColumns();
 
-    // React.useEffect(() => {
-    //     setTimeout(() => {
-    //         const new_category: Category = {
-    //             id: uuid.v4().toString(),
-    //             name: "New Category"
-    //         }
-    //         dispatch(addCategory(new_category));
-    //     }, 5000);
-    // }, [' '])
-
-
-    // const categories = store.getState().categories;
-
-    // // to make sure whole list updates when length of categories changes
-    // // might help prevent render count for the whole screen
-    // useSelector((s: AppState) => s.categories.length);
-    // // might help prevent render count for the whole screen
-    // // to make sure whole list updates when length of categories changes
-
-    // const renderItem = ({ item }: { item: Category, index: number }) => {
-    //     return (
-    //         <Category id={item.id} marginV-20 />
-    //     )
-    // }
 
     const addNewCategory = React.useCallback(() => {
         const new_category: Category = {
@@ -54,25 +30,20 @@ const ManageCategories = (props: ManageCategoriesProps) => {
         dispatch(addCategory(new_category));
     }, [dispatch]);
 
+    const _renderItem = ({ item, index }: { item: string, index: number }) => {
+        return <CategoryCard key={item + 'card'} id={item} />
+    }
+
 
     return (
         <View flex spread bg-white>
-            <ScrollView>
-                {catIds && catIds.map((_) => {
-                    return (
-                        <CategoryCard key={_ + 'card'} id={_} />
-                    )
-                })}
-            </ScrollView>
-
-
-            {/* <FlashList
+            <FlashList
                 numColumns={columns}
-                data={categories}
-                renderItem={renderItem.bind(null)}
+                data={catIds}
+                renderItem={_renderItem.bind(null)}
                 estimatedItemSize={200}
                 contentContainerStyle={styles.contentContainerStyle}
-            /> */}
+            />
 
             <Button onPress={addNewCategory} bg-black label="ADD NEW CATEGORY" style={styles.btn} />
         </View>
