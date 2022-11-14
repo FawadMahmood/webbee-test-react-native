@@ -22,7 +22,6 @@ const Item = ({ item }: ItemProps) => {
 
     const update = (item: Item) => {
         console.log("yopdating");
-
         dispatch(updateItem(item));
     }
 
