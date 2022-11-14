@@ -1,9 +1,15 @@
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-interface CategoryProps { }
+interface CategoryProps {
+    route: { params: { id: string } }
+}
 
-const Category = (props: CategoryProps) => {
+const Category = ({ route }: CategoryProps) => {
+    const { id } = route.params;
+
+    console.log("collection id", id);
+
     return (
         <View style={styles.container}>
             <Text>Category</Text>
