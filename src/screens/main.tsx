@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Button, Text, View } from 'react-native-ui-lib';
+import { Button, View } from 'react-native-ui-lib';
 import { ScreenComponent } from 'rnn-screens';
 import { If } from '@kanzitelli/if-component';
 import { observer } from 'mobx-react';

@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addField } from '../store/fields/actions';
 import CategoryItem from './item';
 import uuid from 'react-native-uuid';
+import SelectDropdown from 'react-native-select-dropdown'
+import VectorIcon from './vector';
 
 interface CategoryItemsProps {
     id: string;
 }
+const countries: FieldType[] = ["text", "number", "checkbox", "date"]
 
 const CategoryItems = ({ id }: CategoryItemsProps) => {
     const dispatch = useDispatch();
@@ -18,11 +21,11 @@ const CategoryItems = ({ id }: CategoryItemsProps) => {
     console.log("CategoryItems", fields);
 
 
-    const onAddNewItem = () => {
+    const onAddNewItem = (type: FieldType) => {
         const field: Field = {
             id: uuid.v4() as string,
             category_id: id,
-            type: "text"
+            type: type
         }
         dispatch(addField(field));
     }
@@ -37,7 +40,35 @@ const CategoryItems = ({ id }: CategoryItemsProps) => {
                 )
             })}
 
-            <Button onPress={onAddNewItem.bind(null)}>ADD NEW ITEM</Button>
+            <SelectDropdown
+                data={countries}
+                onSelect={onAddNewItem.bind(null)}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem
+                }}
+                renderCustomizedButtonChild={() => {
+                    return (
+                        <View>
+                            <Text>ADD NEW ITEM</Text>
+                        </View>
+                    )
+                }}
+                renderDropdownIcon={() => {
+                    return (
+                        <VectorIcon vector={"AntDesign"} name={'caretdown'} size={20} color={''} />
+                    )
+                }}
+                rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    return item
+                }}
+
+            />
+
+            {/* <Button onPress={onAddNewItem.bind(null)}>ADD NEW ITEM</Button> */}
         </View>
     );
 };
