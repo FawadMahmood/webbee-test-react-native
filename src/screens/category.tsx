@@ -7,6 +7,8 @@ import uuid from 'react-native-uuid';
 import { Button } from 'react-native-paper';
 import { addItemRelation } from '../stores/categories/actions';
 import { ItemCard } from '../components';
+import { store } from '../stores';
+import { addAttribute } from '../stores/attributes/actions';
 
 interface CategoryProps {
     route: { params: { id: string } }
@@ -19,9 +21,24 @@ const Category = ({ route }: CategoryProps) => {
     const { id } = route.params;
     const category = useSelector((s: AppState) => s.categories.byIds[id])
     const itemIds = useSelector((s: AppState) => s.categories.byIds[id].itemIds)
+    const fieldIds = useSelector((s: AppState) => s.categories.byIds[id].fieldIds)
+
 
 
     console.log("this category page got", itemIds);
+
+    const getRelevantTypeDataEmptyData = (type: FieldType) => {
+        switch (type) {
+            case "checkbox":
+                return false
+            case "date":
+                return new Date();
+            case "number":
+                return 0;
+            case "text":
+                return "";
+        }
+    }
 
 
     // const items = store.getState().items.filter(s => s.category_id === id); ///useSelector((s: AppState) => s.items.filter(s => s.category_id === id))
@@ -33,9 +50,24 @@ const Category = ({ route }: CategoryProps) => {
             id: uuid.v4().toString(),
             category_id: id,
             name: "New Item",
+            attributeIds: []
         }
         dispatch(addItem(new_item));
         dispatch(addItemRelation({ id: id, item_id: new_item.id }));
+
+        fieldIds.map((_, i) => {
+            const field = store.getState().fields.byIds[_];
+            console.log("field we can add", field);
+
+            dispatch(addAttribute({
+                id: uuid.v4().toString(),
+                ref_id: id,
+                name: "New Attribute",
+                value: getRelevantTypeDataEmptyData(field.type)
+            }));
+
+
+        })
     }, [dispatch]);
 
     // const renderItem = ({ item }: { item: Item, index: number }) => {

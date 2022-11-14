@@ -162,6 +162,7 @@ type Item = {
     id: string;
     category_id: string;
     name?: string;
+    attributeIds: []
 }
 
 
@@ -183,6 +184,36 @@ type ItemActionTypes_U = (AddItem)
 
 // item type
 
+
+//attribute type
+
+
+type Attribute = {
+    id: string;
+    ref_id: string;
+    name?: string;
+    value?: boolean | string | number | Date;
+}
+
+
+interface AttributeNormalized {
+    [key: string]: Attribute
+}
+
+interface AttributeState {
+    byIds: AttributeNormalized;
+    allIds: string[];
+}
+
+interface AddAttribute {
+    type: string;
+    attribute: Attribute
+}
+
+type AttributeActionTypes_U = (AddAttribute)
+
+
+//attribbute type
 
 
 

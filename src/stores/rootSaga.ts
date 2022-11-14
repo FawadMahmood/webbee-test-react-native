@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import attributes from './attributes/sagas';
 
 import categories from './categories/sagas';
 import fields from './fields/sagas';
@@ -10,6 +11,7 @@ export default function* rootSaga() {
         categories(),
         fields(),
         items(),
+        attributes()
         // some more
     ]);
 }
