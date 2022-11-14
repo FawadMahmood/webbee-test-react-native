@@ -40,12 +40,6 @@ const Field = ({ id }: FieldProps) => {
                     <VectorIcon vector={"Octicons"} name="trash" color={theme.color.red} size={20} />
                 </Bounceable>
             </View>
-
-
-
-            {/* <Text>{attribue.name}</Text>
-
-            <Button onPress={onRemoveField.bind(null)}>REMOVE</Button> */}
         </View>
     );
 };
