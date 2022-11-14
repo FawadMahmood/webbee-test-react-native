@@ -26,7 +26,7 @@ const Field = ({ id }: FieldProps) => {
     }
 
     return (
-        <View row style={styles.container}>
+        <View marginT-3 row style={styles.container}>
             <View flex>
                 <TextInput mode="outlined" label={"Name"} value={attribue.value?.toString()} />
             </View>
