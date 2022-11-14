@@ -12,6 +12,7 @@ import { Button, Divider, TextInput } from 'react-native-paper';
 import Field from './core-ui/field';
 import Form from './core-ui/form';
 import { uniqueId } from 'lodash';
+import CategoryItems from './category_items';
 
 interface CategoryProps {
     id: string;
@@ -29,27 +30,23 @@ const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & Paddin
         dispatch(updateCategory(item));
     }
 
-    const onUpdateFieldKey = (key: string, value: string) => {
-        update({ ...item, [key]: value })
-    }
-
-    const customField = (dbProps: any, props: any) => {
-        return (
-            <View row spread marginV-5 height={60}>
-                <View flex marginR-5>
-                    <Field label="Field" value={item.name} _key={'name'} {...props} />
-                </View>
-                <View center width={100} marginT-6 height={"85%"} marginR-5 style={styles.border}>
-                    <Text>TEXT</Text>
-                </View>
-                <View center width={30} marginT-7 height={"80%"}>
-                    <Bounceable onPress={removeCategory.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
-                        <VectorIcon vector={"Octicons"} name="trash" color={theme.color.red} size={20} />
-                    </Bounceable>
-                </View>
-            </View>
-        )
-    }
+    // const customField = (field: Field, props: any) => {
+    //     return (
+    //         <View row spread marginV-5 height={60}>
+    //             <View flex marginR-5>
+    //                 <Field label="Field" value={field.value} _key={'name'} {...props} />
+    //             </View>
+    //             <View center width={100} marginT-6 height={"85%"} marginR-5 style={styles.border}>
+    //                 <Text>TEXT</Text>
+    //             </View>
+    //             <View center width={30} marginT-7 height={"80%"}>
+    //                 <Bounceable onPress={removeCategory.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
+    //                     <VectorIcon vector={"Octicons"} name="trash" color={theme.color.red} size={20} />
+    //                 </Bounceable>
+    //             </View>
+    //         </View>
+    //     )
+    // }
 
     const onSubmitForm = (form: object) => {
         update({ ...item, ...form })
@@ -58,6 +55,10 @@ const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & Paddin
     const onAddNewItem = () => {
         const fields = (item.fields ? [...item.fields, { id: uniqueId(), name: "", type: "text" }] : [{ id: uniqueId(), name: "", type: "text" }]) as Field[]
         update({ ...item, fields: fields })
+    }
+
+    const onTextChanged = (key: string, value: string) => {
+        update({ ...item, [key]: value });
     }
 
     return (
@@ -72,19 +73,14 @@ const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & Paddin
 
             <Divider />
 
-            <View marginT-10>
-                <Form
-                    onSubmitForm={onSubmitForm.bind(null)}
-                    fields={item.fields ? [
-                        (props: any) => <Field label="Name" value={item.name} _key={'name'} {...props} />,
-                        ...item.fields?.map((_) => {
-                            return customField.bind(null, _)
-                        })
-                    ] : [(props: any) => <Field label="Name" value={item.name} _key={'name'} {...props} />,]}
-                />
-            </View>
+            <Form
+                onTextChanged={onTextChanged.bind(null)}
+                fields={[
+                    <Field label="Name" value={item.name} _key={'name'} />
+                ]}
+            />
 
-            <Button onPress={onAddNewItem.bind(null)}>ADD NEW ITEM</Button>
+            <CategoryItems id={item.id} />
         </Card>
     );
 };

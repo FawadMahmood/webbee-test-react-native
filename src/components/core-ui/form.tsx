@@ -4,32 +4,18 @@ import { Text, View, StyleSheet } from 'react-native';
 import { createStateContext } from '../../utils/help';
 
 interface FormProps {
-    fields: ((props: object) => React.ReactNode[] | React.ReactNode)[]
-    onSubmitForm?: any;
+    fields: React.ReactNode
+    onTextChanged?: (key: string, value: string) => void;
 }
 
-const Form = ({ fields, onSubmitForm }: FormProps) => {
+const Form = ({ fields, onTextChanged }: FormProps) => {
     const FormContext = createStateContext();
-    //  email: ''
     return (
-        <Formik
-            initialValues={{}}
-            onSubmit={onSubmitForm?.bind(null)}
-        >
-            {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
-                <FormContext.Provider value={{ handleChange, handleBlur, handleSubmit, values, setFieldValue }}>
-                    <View>
-                        {fields && fields.map((_) => {
-                            if (typeof (_) === "function") {
-                                return _({ values: values });
-                            }
-
-                            return _;
-                        })}
-                    </View>
-                </FormContext.Provider>
-            )}
-        </Formik>
+        <FormContext.Provider value={{ onTextChanged }}>
+            <View>
+                {fields}
+            </View>
+        </FormContext.Provider>
     );
 };
 

@@ -32,6 +32,7 @@ type FieldType = "text" | "number" | "date" | "checkbox"
 
 type Field = {
   id: string;
+  category_id: string;
   name?: string;
   type: FieldType;
   value?: string | number | typeof Date
@@ -48,10 +49,17 @@ interface AddCategory {
   category: Category
 }
 
+interface AddField {
+  type: string;
+  field: Field
+}
+
 interface DeleteCategory {
   type: string;
   id: string
 }
+
+type FieldsActionTypes_U = (AddField)
 
 type CategoriesActionTypes_U = (AddCategory & DeleteCategory); // Union Types
 
@@ -71,9 +79,10 @@ interface IconProps {
 
 // handleChange,handleBlur,handleSubmit,values
 interface FormElement {
-  handleChange?: (key: string, value: any) => void;
-  handleBlur?: (key: string) => void;
-  handleSubmit?: () => void;
-  values: any;
-  setFieldValue: (key: string, value: any) => void;
+  onTextChanged: (key: string, value: any) => void;
+  // handleChange?: (key: string, value: any) => void;
+  // handleBlur?: (key: string) => void;
+  // handleSubmit?: () => void;
+  // values: any;
+  // setFieldValue: (key: string, value: any) => void;
 }
