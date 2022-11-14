@@ -49,7 +49,8 @@ const ManageCategories = (props: ManageCategoriesProps) => {
         const new_category: Category = {
             id: uuid.v4().toString(),
             name: "New Category",
-            fieldIds: []
+            fieldIds: [],
+            itemIds: [],
         }
         dispatch(addCategory(new_category));
     }, [dispatch]);

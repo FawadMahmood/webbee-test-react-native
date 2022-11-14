@@ -5,7 +5,7 @@ import { Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-native-uuid';
 import { addField } from '../../stores/fields/actions';
-import { addItemRelation } from '../../stores/categories/actions';
+import { addFieldRelation } from '../../stores/categories/actions';
 import AttributesField from './attributes';
 
 interface CategoryCardProps {
@@ -28,7 +28,7 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
             type: "text",
         }
         dispatch(addField(field));
-        dispatch(addItemRelation({ id: id, item_id: field.id }));
+        dispatch(addFieldRelation({ id: id, item_id: field.id }));
     }, [dispatch]);
 
 

@@ -1,5 +1,5 @@
 import {
-    ADD_CATEGORY, ADD_ITEM_RELATION, DELETE_CATEGORY, UPDATE_CATEGORY
+    ADD_CATEGORY, ADD_FIELD_RELATION, ADD_ITEM_RELATION, DELETE_CATEGORY, UPDATE_CATEGORY
 } from './actions';
 
 const initialState: CategoryState = {
@@ -18,7 +18,7 @@ const categories = (
 
     switch (action.type) {
         case ADD_CATEGORY:
-            newState.byIds = { ...state.byIds, [action.category.id]: { ...action.category, fieldIds: [] } };
+            newState.byIds = { ...state.byIds, [action.category.id]: { ...action.category, fieldIds: [], itemIds: [] } };
             newState.allIds = [...state.allIds, action.category.id];
             console.log("state is now", newState.allIds.length, Object.entries(newState.byIds).length);
             return newState;
@@ -43,9 +43,11 @@ const categories = (
             newState.allIds = newState.allIds.filter((s) => s !== action.id);
             console.log("state is now", newState.allIds.length, Object.entries(newState.byIds).length);
             return newState;
-        case ADD_ITEM_RELATION:
+        case ADD_FIELD_RELATION:
             newState.byIds[action.relation.id].fieldIds = [...newState.byIds[action.relation.id].fieldIds, action.relation.item_id]
             return newState;
+        case ADD_ITEM_RELATION:
+            newState.byIds[action.relation.id].itemIds = [...newState.byIds[action.relation.id].itemIds, action.relation.item_id]
         default:
             return state;
     }

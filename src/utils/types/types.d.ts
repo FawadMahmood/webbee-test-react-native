@@ -62,6 +62,8 @@ type CounterGetResponse = {
 
 
 
+// field type
+
 type FieldType = "text" | "number" | "date" | "checkbox"
 
 type Field = {
@@ -83,11 +85,30 @@ interface FieldState {
 }
 
 
+interface AddField {
+    type: string;
+    field: Field
+}
+
+interface DeleteField {
+    type: string;
+    id: string
+}
+
+type FieldsActionTypes_U = (AddField & DeleteField)
+
+
+// field type
+
+
+
+
+// category type
+
+
 interface CategoryNormalized {
     [key: string]: Category
 }
-
-// type NumberIndexed<T> = { [index: number]: T };
 
 interface CategoryState {
     byIds: CategoryNormalized;
@@ -98,19 +119,17 @@ type Category = {
     id: string;
     name?: string;
     fieldIds: string[];
+    itemIds: string[]
 }
 
-type CategoryItemRelation = {
+type CategoryRelation = {
     id: string;
     item_id: string;
 }
 
-type Item = {
-    id: string;
-    category_id: string;
-    name?: string;
-    fields: Field[]
-}
+
+
+
 
 interface AddCategory {
     type: string;
@@ -119,12 +138,40 @@ interface AddCategory {
 
 interface AddCategoryItemRelation {
     type: string;
-    relation: CategoryItemRelation
+    relation: CategoryRelation
 }
 
-interface AddField {
+interface DeleteCategory {
     type: string;
-    field: Field
+    id: string
+}
+
+type CategoriesActionTypes_U = (AddCategory & DeleteCategory & AddCategoryItemRelation); // Union Types
+
+
+
+
+// category type
+
+
+// item type
+
+
+
+type Item = {
+    id: string;
+    category_id: string;
+    name?: string;
+}
+
+
+interface ItemNormalized {
+    [key: string]: Item
+}
+
+interface ItemState {
+    byIds: ItemNormalized;
+    allIds: string[];
 }
 
 interface AddItem {
@@ -134,28 +181,30 @@ interface AddItem {
 
 type ItemActionTypes_U = (AddItem)
 
+// item type
 
-interface DeleteCategory {
-    type: string;
-    id: string
-}
 
-interface DeleteField {
-    type: string;
-    id: string
-}
 
-type FieldsActionTypes_U = (AddField & DeleteField)
 
-type CategoriesActionTypes_U = (AddCategory & DeleteCategory & AddCategoryItemRelation); // Union Types
 
+
+
+
+
+
+
+// global reducer states
 
 interface AppState {
     categories: CategoryState;
     fields: FieldState;
-    items: Item[]
+    items: ItemState
 }
 
+// global reducer states
+
+
+// extras
 interface IconProps {
     vector: icon_vector;
     name: string;
@@ -174,3 +223,4 @@ interface FormElement {
     // values: any;
     // setFieldValue: (key: string, value: any) => void;
 }
+// extras

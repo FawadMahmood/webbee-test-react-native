@@ -28,7 +28,6 @@ export type ScreenProps = {
 interface RootNavigationProps { }
 
 const RootNavigation = (props: RootNavigationProps) => {
-
   const categories = useSelector((s: AppState) => s.categories.allIds);
 
   return (
