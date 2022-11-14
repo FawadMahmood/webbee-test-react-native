@@ -14,6 +14,7 @@ import Field from './core-ui/field';
 import Form from './core-ui/form';
 import CategoryItems from './category_items';
 import { useColumns } from '../utils/columns';
+import { createStateContext } from '../utils/help';
 
 interface CategoryProps {
     id: string;
@@ -21,6 +22,7 @@ interface CategoryProps {
 
 const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & PaddingModifiers) => {
     const dispatch = useDispatch();
+    const FormContext = createStateContext();
 
 
     const item = useSelector((s: AppState) => s.categories.find((s) => s.id === id)) as Category;

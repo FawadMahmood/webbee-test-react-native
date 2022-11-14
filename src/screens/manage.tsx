@@ -40,15 +40,16 @@ const ManageCategories = (props: ManageCategoriesProps) => {
 
 
     return (
-        <View padding-10 flex spread bg-white>
+        <View flex spread bg-white>
             <FlashList
                 numColumns={columns}
                 data={categories}
                 renderItem={renderItem.bind(null)}
                 estimatedItemSize={200}
+                contentContainerStyle={styles.contentContainerStyle}
             />
 
-            <Button onPress={addNewCategory} bg-black label="ADD NEW CATEGORY" />
+            <Button onPress={addNewCategory} bg-black label="ADD NEW CATEGORY" style={styles.btn} />
         </View>
     );
 };
@@ -56,5 +57,12 @@ const ManageCategories = (props: ManageCategoriesProps) => {
 export default ManageCategories;
 
 const styles = StyleSheet.create({
-    container: {}
+    container: {},
+    contentContainerStyle: {
+        paddingBottom: 20
+    },
+    btn: {
+        width: "90%",
+        alignSelf: "center"
+    }
 });
