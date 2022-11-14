@@ -54,3 +54,76 @@ type LanguageAction = {
 type CounterGetResponse = {
     value: number;
 };
+
+
+
+
+
+
+
+
+type FieldType = "text" | "number" | "date" | "checkbox"
+
+type Field = {
+    id: string;
+    category_id: string;
+    name?: string;
+    type: FieldType;
+    value?: string | number | typeof Date
+}
+
+type Category = {
+    id: string;
+    name?: string;
+    fields?: Field[]
+}
+
+interface AddCategory {
+    type: string;
+    category: Category
+}
+
+interface AddField {
+    type: string;
+    field: Field
+}
+
+interface DeleteCategory {
+    type: string;
+    id: string
+}
+
+interface DeleteField {
+    type: string;
+    id: string
+}
+
+type FieldsActionTypes_U = (AddField & DeleteField)
+
+type CategoriesActionTypes_U = (AddCategory & DeleteCategory); // Union Types
+
+
+interface AppState {
+    categories: Category[];
+    fields: Field[];
+
+}
+
+interface IconProps {
+    vector: icon_vector;
+    name: string;
+    size: number;
+    color: string;
+    style?: StyleProp<TextStyle>;
+    onPress?: () => void | undefined
+}
+
+// handleChange,handleBlur,handleSubmit,values
+interface FormElement {
+    onTextChanged: (key: string, value: any) => void;
+    // handleChange?: (key: string, value: any) => void;
+    // handleBlur?: (key: string) => void;
+    // handleSubmit?: () => void;
+    // values: any;
+    // setFieldValue: (key: string, value: any) => void;
+}
