@@ -1,4 +1,4 @@
-export const ADD_ITEM = 'ADD_ITEM';
+export const ADD_ITEM = 'ADD_NEW_ITEM';
 export const UPDATE_ITEM = "UPDATE_ITEM"
 export const DELETE_ITEM = "DELETE_ITEM"
 
@@ -10,4 +10,12 @@ export const addItem = (
     item,
 });
 
+
+
+export const updateItem = (
+    item: Item,
+): AddItem => ({
+    type: UPDATE_ITEM,
+    item,
+});
 

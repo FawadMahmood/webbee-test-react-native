@@ -17,7 +17,7 @@ const categories = (
             if (!state.find((sr) => sr.id === action.category.id)) {
                 return [
                     ...state,
-                    { ...action.category, fields: [] },
+                    { ...action.category },
                 ];
             }
             return state;
@@ -29,7 +29,6 @@ const categories = (
                 }
             })
             return newState;
-        // return [...state.filter((s) => s.id !== action.category.id), action.category]
         case DELETE_CATEGORY:
             return [...state.filter((s) => s.id !== action.id)];
         default:

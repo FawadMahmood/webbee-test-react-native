@@ -81,6 +81,7 @@ type Item = {
     id: string;
     category_id: string;
     name?: string;
+    fields: Field[]
 }
 
 interface AddCategory {
@@ -97,6 +98,9 @@ interface AddItem {
     type: string;
     item: Item
 }
+
+type ItemActionTypes_U = (AddItem)
+
 
 interface DeleteCategory {
     type: string;
@@ -116,7 +120,7 @@ type CategoriesActionTypes_U = (AddCategory & DeleteCategory); // Union Types
 interface AppState {
     categories: Category[];
     fields: Field[];
-
+    items: Item[]
 }
 
 interface IconProps {

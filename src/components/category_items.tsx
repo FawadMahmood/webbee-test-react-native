@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { addField } from '../stores/fields/actions';
-import CategoryItem from './item';
+import CategoryItem from './fieldItem';
 import uuid from 'react-native-uuid';
 import SelectDropdown from 'react-native-select-dropdown'
 import VectorIcon from './vector';
@@ -17,7 +17,6 @@ const countries: FieldType[] = ["text", "number", "checkbox", "date"]
 const CategoryItems = ({ id }: CategoryItemsProps) => {
     const dispatch = useDispatch();
     const fields = useSelector((s: AppState) => s.fields.filter((x) => x.category_id === id));
-    console.log("CategoryItems", fields);
 
 
     const onAddNewItem = (type: FieldType) => {

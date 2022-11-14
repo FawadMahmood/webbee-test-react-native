@@ -1,6 +1,6 @@
-import { ADD_FIELD } from './actions';
+import { ADD_ITEM } from './actions';
 
 
-export default function* fields() {
+export default function* items() {
     // yield takeEvery<DeleteSubredditAction>(DELETE_SUBREDDIT, deletePostsForSubreddit);
 }

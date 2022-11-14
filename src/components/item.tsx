@@ -1,65 +1,83 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import { Divider } from 'react-native-paper';
 import { Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { Bounceable } from 'rn-bounceable';
-import { VectorIcon } from '.';
-import { deleteField, updateField } from '../stores/fields/actions';
+import { updateItem } from '../stores/items/actions';
 import { theme } from '../utils/constants';
 import Field from './core-ui/field';
 import Form from './core-ui/form';
+import VectorIcon from './vector';
 
-interface CategoryItemProps {
-    id: string;
+interface ItemProps {
+    item: Item;
 }
 
-const CategoryItem = ({ id }: CategoryItemProps) => {
+const Item = ({ item }: ItemProps) => {
+    // console.log('item updating', it);
+
     const dispatch = useDispatch();
-    const item = useSelector((s: AppState) => s.fields.find((x) => x.id === id)) as Field;
 
-    const removeField = () => {
-        dispatch(deleteField(item.id))
-    }
 
-    const update = (item: Field) => {
-        dispatch(updateField(item));
+    const update = (item: Item) => {
+        console.log("yopdating");
+
+        dispatch(updateItem(item));
     }
 
     const onTextChanged = (key: string, value: string) => {
-        update({ ...item, [key]: value });
+        if (key.includes('items.')) {
+            const ids = key.split('.');
+            const indexToUpdate = item.fields.findIndex((s, i) => s.id === ids[1]);
+            let _item: Item = { ...item };
+            _item.fields[indexToUpdate].value = value;
+            update(_item);
+        } else {
+            update({ ...item, [key]: value });
+        }
     }
 
+    const removeItem = () => {
+
+    }
+
+    const it = useSelector((s: AppState) => s.items.find((a) => a.id === item.id));
+
+
     return (
-        <View row spread marginV-5 height={60}>
-            <View flex marginR-5>
-                <Form
-                    onTextChanged={onTextChanged.bind(null)}
-                    fields={[
-                        <Field label="Name" value={item.name} _key={'name'} />
-                    ]}
-                />
-            </View>
-
-            <View center width={100} marginT-6 height={"98%"} marginR-5 style={styles.border}>
-                <Text vsmall wbold>{item.type.toUpperCase()}</Text>
-            </View>
-
-            <View center width={30} marginT-7 height={"80%"}>
-                <Bounceable onPress={removeField.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
-                    <VectorIcon vector={"Octicons"} name="trash" color={theme.color.red} size={20} />
+        <View marginV-5 style={styles.container}>
+            <View row spread marginB-10>
+                <Text large wbold style={styles.controlledWidth}>{item.name}</Text>
+                <Bounceable onPress={removeItem.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
+                    <VectorIcon vector={"AntDesign"} name="closecircle" color={theme.color.blue} size={30} />
+                    <Text vsmall wregular>Remove</Text>
                 </Bounceable>
             </View>
+
+            <Form
+                onTextChanged={onTextChanged.bind(null)}
+                fields={[
+                    <Field marginB-5 key={'field_text'} label={"Name"} value={it?.name} _key={'name'} />,
+                    it?.fields.map((_, i) => {
+                        return (
+                            <Field key={_.id + i} label={_.name as string} value={_.value} _key={"items" + "." + _.id} />
+                        )
+                    })
+                ]}
+            />
         </View>
     );
 };
 
-export default CategoryItem;
+export default React.memo(Item);
 
 const styles = StyleSheet.create({
-    container: {},
-    border: {
-        borderWidth: 1,
-        borderColor: theme.color.blue,
-        borderRadius: 10
+    container: {
+        borderWidth: 1
+    },
+    controlledWidth: {
+        maxWidth: "80%",
+
     }
 });

@@ -29,22 +29,14 @@ interface RootNavigationProps { }
 
 const RootNavigation = (props: RootNavigationProps) => {
 
-  const categories = store.getState().categories;
-
-  // to make sure whole list updates when length of categories changes
-  // might help prevent render count for the whole screen
-  useSelector((s: AppState) => s.categories.length);
-  // might help prevent render count for the whole screen
-  // to make sure whole list updates when length of categories changes
-
-
+  const categories = useSelector((s: AppState) => s.categories);
 
   return (
     <Drawer.Navigator initialRouteName="Dashboard">
       <Drawer.Screen name="dashboard" component={Dashboard} options={{ title: "Dashboard" }} />
       {categories && categories.map((_) => {
         return (
-          <Drawer.Screen key={_.id + 'drawer_item'} name={_.id} component={Category} initialParams={{ id: _.id }} options={{ title: _.name }} />
+          <Drawer.Screen key={_.id + 'drawer_item'} name={_.id} component={Category as any} initialParams={{ id: _.id }} options={{ title: _.name }} />
         )
       })}
       <Drawer.Screen name="manage" component={ManageCategories} options={{ title: "Manage Categories" }} />

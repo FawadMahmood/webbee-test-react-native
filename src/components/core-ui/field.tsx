@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
+import { MarginModifiers, View } from 'react-native-ui-lib';
 import { useStateContext } from '../../utils/help';
 
 interface FieldProps {
@@ -9,18 +10,21 @@ interface FieldProps {
     label: string;
 }
 
-const Field = ({ _key, value, label }: FieldProps) => {
+const Field = ({ _key, value, label, ...modifiers }: FieldProps & MarginModifiers) => {
     const formActions = useStateContext<FormElement>() as FormElement;
 
     return (
-        <TextInput
-            mode="outlined"
-            label={label}
-            value={value}
-            defaultValue={value}
-            onChangeText={formActions.onTextChanged.bind(null, _key)}
-            style={styles.container}
-        />
+        <View {...modifiers}>
+            <TextInput
+
+                mode="outlined"
+                label={label}
+                value={value}
+                defaultValue={value}
+                onChangeText={formActions.onTextChanged.bind(null, _key)}
+                style={styles.container}
+            />
+        </View>
     );
 };
 
