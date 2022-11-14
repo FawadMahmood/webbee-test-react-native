@@ -25,7 +25,7 @@ const Category = ({ route }: CategoryProps) => {
 
 
 
-    console.log("this category page got", itemIds);
+    console.log("this category page got", fieldIds);
 
     const getRelevantTypeDataEmptyData = (type: FieldType) => {
         switch (type) {
@@ -61,10 +61,11 @@ const Category = ({ route }: CategoryProps) => {
 
             const attr = {
                 id: uuid.v4().toString(),
-                ref_id: id,
+                field_id: id,
                 name: "New Attribute",
+                type: field.type,
                 value: getRelevantTypeDataEmptyData(field.type),
-                category_id: id
+                category_id: id,
             };
 
             dispatch(addAttribute(attr));
@@ -72,10 +73,9 @@ const Category = ({ route }: CategoryProps) => {
             dispatch(addItemAndAttributeRelation({
                 id: new_item.id,
                 attrubute_id: attr.id
-            }))
-
+            }));
         })
-    }, [dispatch]);
+    }, [dispatch, fieldIds]);
 
     // const renderItem = ({ item }: { item: Item, index: number }) => {
     //     return (
