@@ -66,6 +66,8 @@ type CategoriesActionTypes_U = (AddCategory & DeleteCategory); // Union Types
 
 interface AppState {
   categories: Category[];
+  fields: Field[];
+
 }
 
 interface IconProps {

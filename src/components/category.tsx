@@ -40,9 +40,9 @@ const Category = ({ id, ...modifiers }: CategoryProps & MarginModifiers & Paddin
     //                 <Text>TEXT</Text>
     //             </View>
     //             <View center width={30} marginT-7 height={"80%"}>
-    //                 <Bounceable onPress={removeCategory.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
-    //                     <VectorIcon vector={"Octicons"} name="trash" color={theme.color.red} size={20} />
-    //                 </Bounceable>
+    // <Bounceable onPress={removeCategory.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
+    //     <VectorIcon vector={"Octicons"} name="trash" color={theme.color.red} size={20} />
+    // </Bounceable>
     //             </View>
     //         </View>
     //     )

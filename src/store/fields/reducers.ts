@@ -15,6 +15,7 @@ const fields = (
             if (!state.find((sr) => sr.id === action.field.id)) {
                 return [
                     ...state,
+                    action.field
                 ];
             }
             return state;
