@@ -192,6 +192,7 @@ type Attribute = {
     category_id: string;
     name?: string;
     type: FieldType;
+    item_id: string;
     value?: boolean | string | number | Date;
 }
 

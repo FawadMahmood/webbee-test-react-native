@@ -19,7 +19,7 @@ const Attribute = ({ id }: AttributeProps) => {
         if (isExist === undefined && attribite) {
             console.log("YES REMOVED CAN SAFELY DELETE");
             dispatch(removeItemAndAttributeRelation({
-                id: attribite.field_id,
+                id: attribite.item_id,
                 attrubute_id: attribite.id
             }));
         }

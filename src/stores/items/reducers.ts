@@ -25,10 +25,8 @@ const fields = (
             return newState;
         case REMOVE_ITEM_ATTRIBUTE_RELATION:
             console.log("UPPER WALA LOG", newState.byIds[action.relation.id],);
-
             console.log(REMOVE_ITEM_ATTRIBUTE_RELATION, newState.byIds[action.relation.id]);
-
-            // newState.byIds[action.relation.id].attributeIds = newState.byIds[action.relation.id].attributeIds.filter(s => s !== action.relation.attrubute_id)
+            newState.byIds[action.relation.id].attributeIds = newState.byIds[action.relation.id].attributeIds.filter(s => s !== action.relation.attrubute_id)
             return newState;
         default:
             return state;
