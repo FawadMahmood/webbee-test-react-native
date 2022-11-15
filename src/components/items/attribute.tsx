@@ -1,7 +1,8 @@
+import { If } from '@kanzitelli/if-component';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { TextInput } from 'react-native-paper';
-import { View } from 'react-native-ui-lib';
+import { Text, TextInput } from 'react-native-paper';
+import { Switch, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAttribute, updateAttribute } from '../../stores/attributes/actions';
 import { removeItemAndAttributeRelation } from '../../stores/items/actions';
@@ -41,9 +42,29 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
         return null;
     }
 
+    console.log("attribute value", attribite);
+
+
     return (
         <View marginT-10>
-            <TextInput keyboardType={getKeyboardType(field.type)} mode="outlined" label={field.name} onChangeText={onChangeText.bind(null, 'name')} value={attribite.name} />
+            <If
+                _={field.type === "number" || field.type === "text"}
+                _then={
+                    <TextInput keyboardType={getKeyboardType(field.type)} mode="outlined" label={field.name} onChangeText={onChangeText.bind(null, 'name')} value={attribite.name} />
+                }
+                _else={(
+                    <If
+                        _={field.type === "checkbox"}
+                        _then={(
+                            <View row>
+                                <Text>{field.name + "? "}</Text>
+                                <Switch value={typeof (attribite.value) === "boolean" ? attribite.value : attribite.value === "true"} onValueChange={onChangeText.bind(null, 'value')} />
+                            </View>
+                        )}
+                    />
+                )}
+            />
+
         </View>
 
     );
