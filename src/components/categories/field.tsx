@@ -12,12 +12,13 @@ import VectorIcon from '../vector';
 
 interface FieldProps {
     id: string;
+    onRemovedItem: any;
 }
 
 
 
 
-const Field = ({ id }: FieldProps) => {
+const Field = ({ id, onRemovedItem }: FieldProps) => {
     const dispatch = useDispatch();
     const attribue = useSelector((s: AppState) => s.fields.byIds[id]);
 
@@ -32,6 +33,7 @@ const Field = ({ id }: FieldProps) => {
         }));
 
         dispatch(deleteField(id));
+        if (onRemovedItem) onRemovedItem(id);
     }
 
     const onChangeText = (key: string, value: any) => {

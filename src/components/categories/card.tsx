@@ -12,8 +12,8 @@ import { VectorIcon } from '../../components';
 import { theme } from '../../utils/constants';
 import { store } from '../../stores';
 import { getRelevantTypeDataEmptyData, inputTypes } from '../../utils/help';
-import { addAttribute } from '../../stores/attributes/actions';
-import { addItemAndAttributeRelation } from '../../stores/items/actions';
+import { addAttribute, deleteAttribute } from '../../stores/attributes/actions';
+import { addItemAndAttributeRelation, removeItemAndAttributeRelation } from '../../stores/items/actions';
 
 interface CategoryCardProps {
     id: string;
@@ -98,6 +98,21 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
     }
 
+    const onRemovedItem = (field: string) => {
+        console.log("onRemovedItem", field);
+        category.itemIds.map((_) => {
+            store.getState().items.byIds[_].attributeIds.map((attr) => {
+                if (store.getState().attributes.byIds[attr].field_id === _) {
+                    dispatch(removeItemAndAttributeRelation({
+                        id: store.getState().attributes.byIds[attr].item_id,
+                        attrubute_id: store.getState().attributes.byIds[attr].id
+                    }));
+                    dispatch(deleteAttribute(store.getState().attributes.byIds[attr].id));
+                }
+            })
+        })
+    }
+
     return (
         <Card width={'96%'} marginV-5 padding-15 style={[styles.container]}>
             <View row spread marginB-10>
@@ -114,7 +129,7 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
 
             {fieldIds && fieldIds.map((_, i) => {
                 return (
-                    <AttributesField key={_ + 'attribute'} id={_} />
+                    <AttributesField onRemovedItem={onRemovedItem.bind(null)} key={_ + 'attribute'} id={_} />
                 )
             })}
 
