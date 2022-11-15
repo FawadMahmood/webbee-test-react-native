@@ -1,7 +1,10 @@
+/**
+ * @format
+ */
+
 import 'react-native-gesture-handler';
-require('react-native-ui-lib/config').setConfig({appScheme: 'default'});
-import {registerRootComponent} from 'rnn-screens';
+import { AppRegistry } from 'react-native';
+import App from './App';
+import { name as appName } from './app.json';
 
-import {App, beforeStart} from './App';
-
-registerRootComponent(App, {beforeStart});
+AppRegistry.registerComponent(appName, () => App);

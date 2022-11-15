@@ -1,47 +1,51 @@
-import { generateRNNScreens } from 'rnn-screens';
-import { gestureHandlerRootHOC as withGestureHandler } from 'react-native-gesture-handler';
+import * as React from 'react';
+import { StyleSheet } from "react-native";
 
-import { Main } from './main';
-import { Settings } from './settings';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Dashboard from './dashboard';
+import { Text, View } from 'react-native-ui-lib';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ManageCategories from './manage';
+import Category from './category';
+import { useSelector } from 'react-redux';
+import { store } from '../stores';
 
-import { withBottomTab, withRightButtons } from '../services/navigation/options';
-import { Sample } from './_screen-sample';
-import { Playground } from './playground';
-import { withAppearance } from '../utils/hooks';
-import { withReduxProvider, withSS } from '../utils/providers';
 
-export const screens = generateRNNScreens(
-  {
-    Main: {
-      component: Main,
-      options: {
-        topBar: { title: { text: 'Manage Categories' } },
-        ...withBottomTab('Categories', 'home'),
-      },
-    },
-    Playground: {
-      component: Playground,
-      options: {
-        topBar: { title: { text: 'Playground' } },
-        ...withBottomTab('Playground', 'construct'),
-      },
-    },
-    Settings: {
-      component: Settings,
-      options: {
-        // title is set in services/navigation/index.ts::configureTitleTranslations
-        ...withBottomTab('Settings', 'settings'),
-      },
-    },
+const Drawer = createDrawerNavigator();
 
-    Sample: {
-      component: Sample,
-      options: {
-        topBar: {
-          title: { text: 'Sample' },
-        },
-      },
-    },
-  },
-  [withGestureHandler, withSS, withAppearance, withReduxProvider],
-);
+
+export type ModalProps = {
+  ExampleModal: undefined;
+};
+
+export type ScreenProps = {
+  Main: undefined;
+  Example: ExampleScreenProps;
+  Settings: undefined;
+} & ModalProps;
+
+
+interface RootNavigationProps { }
+
+const RootNavigation = (props: RootNavigationProps) => {
+  const categories = useSelector((s: AppState) => s.categories.allIds);
+
+  return (
+    <Drawer.Navigator initialRouteName="Dashboard">
+      <Drawer.Screen name="dashboard" component={Dashboard} options={{ title: "Dashboard" }} />
+      {categories && categories.map((_) => {
+        const name = store.getState().categories.byIds[_].name;
+        return (
+          <Drawer.Screen key={_ + "drawer_item"} name={_} component={Category as any} initialParams={{ id: _ }} options={{ title: name }} />
+        )
+      })}
+      <Drawer.Screen name="manage" component={ManageCategories} options={{ title: "Manage Categories" }} />
+    </Drawer.Navigator>
+  );
+};
+
+export default RootNavigation;
+
+const styles = StyleSheet.create({
+  container: {}
+});

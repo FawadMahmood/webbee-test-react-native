@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.rnnstarter",
+  "applicationId": "com.taskapp",
   "variantName": "debug",
   "elements": [
     {

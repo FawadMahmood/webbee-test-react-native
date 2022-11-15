@@ -1,9 +1,12 @@
-import Category from './category'
+import CategoryCard from './categories/card'
+import AttributesField from './categories/field'
+import ItemCard from './items/card'
 import VectorIcon from './vector'
 
 
-
 export {
-    Category,
+    CategoryCard,
+    AttributesField,
+    ItemCard,
     VectorIcon
 }

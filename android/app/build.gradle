@@ -83,7 +83,6 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -136,7 +135,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.rnnstarter"
+        applicationId "com.taskapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -166,8 +165,8 @@ android {
         // We configure the NDK build only if you decide to opt-in for the New Architecture.
         externalNativeBuild {
             cmake {
-	            path "$projectDir/src/main/jni/CMakeLists.txt"
-	        }
+                path "$projectDir/src/main/jni/CMakeLists.txt"
+            }
         }
         def reactAndroidProjectDir = project(':ReactAndroid').projectDir
         def packageReactNdkDebugLibs = tasks.register("packageReactNdkDebugLibs", Copy) {
@@ -304,6 +303,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 def isNewArchitectureEnabled() {
     // To opt-in for the New Architecture, you can either:

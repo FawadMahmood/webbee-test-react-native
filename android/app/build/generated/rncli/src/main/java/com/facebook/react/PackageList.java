@@ -11,22 +11,20 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// @react-native-community/datetimepicker
+import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 // @shopify/flash-list
 import com.shopify.reactnative.flash_list.ReactNativeFlashListPackage;
-// expo
-import expo.modules.ExpoModulesPackage;
-// react-native-fast-image
-import com.dylanvann.fastimage.FastImageViewPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-mmkv
 import com.reactnativemmkv.MmkvPackage;
-// react-native-navigation
-import com.reactnativenavigation.react.NavigationPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
-// react-native-splash-screen
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
+// react-native-safe-area-context
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
+// react-native-screens
+import com.swmansion.rnscreens.RNScreensPackage;
 // react-native-ui-lib
 import com.wix.reactnativeuilib.highlighterview.HighlighterViewPackage;
 import com.wix.reactnativeuilib.keyboardinput.KeyboardInputPackage;
@@ -79,14 +77,13 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
+      new RNDateTimePickerPackage(),
       new ReactNativeFlashListPackage(),
-      new ExpoModulesPackage(),
-      new FastImageViewPackage(),
       new RNGestureHandlerPackage(),
       new MmkvPackage(),
-      new NavigationPackage(reactNativeHost),
       new ReanimatedPackage(),
-      new SplashScreenReactPackage(),
+      new SafeAreaContextPackage(),
+      new RNScreensPackage(),
       new HighlighterViewPackage(),
       new WheelPickerPackage(),
       new TextInputDelKeyHandlerPackage(),

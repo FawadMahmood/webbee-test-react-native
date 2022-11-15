@@ -1,33 +1,46 @@
-import {LogBox} from 'react-native';
-import {Root, Screen, BottomTabs} from 'rnn-screens';
+import { LogBox } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider as PaperProvider } from 'react-native-paper'
+import { AppNavigator } from './src/app';
+import { configureDesignSystem } from './src/utils/designSystem';
+import { initServices, ServicesProvider } from './src/services';
+import { Provider } from 'react-redux';
+import { persistor, store } from './src/stores';
 
-import {screens} from './src/screens';
-import {Services} from './src/services';
-import {Stores} from './src/stores';
-import {DesignSystem} from './src/utils/designSystem';
-import SplashScreen from 'react-native-splash-screen';
+LogBox.ignoreLogs([
+  'EventEmitter.removeListener',
+  '`new NativeEventEmitter()`',
+  '[react-native-gesture-handler] Seems like', // https://github.com/software-mansion/react-native-gesture-handler/issues/1831
+]);
 
-LogBox.ignoreLogs(['Require', 'RCTBridge']);
+export default (): JSX.Element => {
+  const [ready, setReady] = useState(false);
 
-export const beforeStart = async (): PVoid => {
-  // 1. hydrate stores
-  await Stores.hydrate();
+  const startApp = useCallback(async () => {
+    await initServices();
 
-  // 2. configure design system
-  await DesignSystem.configure();
+    configureDesignSystem();
 
-  // 3. init services
-  await Services.init();
+    setReady(true);
+  }, []);
 
-  // 4. hide splash screen
-  SplashScreen.hide();
-};
+  useEffect(() => {
+    startApp();
+  }, [startApp]);
 
-export const App = () =>
-  Root(
-    BottomTabs([
-      Screen(screens.get('Main')),
-      Screen(screens.get('Playground')),
-      Screen(screens.get('Settings')),
-    ]),
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor} >
+          <ServicesProvider>
+            <PaperProvider>
+              {ready ? <AppNavigator /> : null}
+            </PaperProvider>
+          </ServicesProvider>
+        </PersistGate>
+      </Provider>
+    </GestureHandlerRootView>
   );
+};

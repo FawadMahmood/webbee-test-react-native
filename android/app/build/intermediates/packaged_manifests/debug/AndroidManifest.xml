@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rnnstarter"
+    package="com.taskapp"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="33" />
+        android:targetSdkVersion="31" />
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <queries>
-
-        <!-- Query open documents -->
-        <intent>
-            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
-        </intent>
-    </queries>
-
-    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
 
     <application
-        android:name="com.rnnstarter.MainApplication"
+        android:name="com.taskapp.MainApplication"
         android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
@@ -38,7 +26,7 @@
             android:name="com.facebook.react.devsupport.DevSettingsActivity"
             android:exported="false" />
         <activity
-            android:name="com.rnnstarter.MainActivity"
+            android:name="com.taskapp.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:exported="true"
             android:label="@string/app_name"
@@ -52,25 +40,8 @@
         </activity>
 
         <provider
-            android:name="expo.modules.filesystem.FileSystemFileProvider"
-            android:authorities="com.rnnstarter.FileSystemFileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true" >
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_system_provider_paths" />
-        </provider>
-
-        <meta-data
-            android:name="org.unimodules.core.AppLoader#react-native-headless"
-            android:value="expo.modules.adapters.react.apploader.RNHeadlessAppLoader" />
-        <meta-data
-            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
-            android:value="GlideModule" />
-
-        <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.rnnstarter.androidx-startup"
+            android:authorities="com.taskapp.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
