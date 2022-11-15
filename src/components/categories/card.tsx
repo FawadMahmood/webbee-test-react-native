@@ -118,7 +118,6 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
                 )
             })}
 
-
             <View height={10} />
 
 
