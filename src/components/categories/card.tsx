@@ -20,14 +20,12 @@ interface CategoryCardProps {
     id: string;
 }
 
-const filters = [
-    { label: 'Text', value: 0 },
-    { label: 'Number', value: 1 },
-    { label: 'Checkbox', value: 2 },
-    { label: 'Date', value: 3 }
+const options = [
+    { label: 'Text', value: 'text' },
+    { label: 'Number', value: 'number' },
+    { label: 'Checkbox', value: 'checkbox' },
+    { label: 'Date', value: 'date' }
 ];
-
-const countries: FieldType[] = ["text", "number", "checkbox", "date"]
 
 
 const CategoryCard = ({ id }: CategoryCardProps) => {
@@ -62,8 +60,8 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
     }
 
 
-    const onAddField = (props: any) => {
-        console.log(props);
+    const onAddField = (props: FieldType) => {
+        onAddNewField(props);
     }
 
     const onValueSelect = () => {
@@ -100,11 +98,11 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
                 migrateTextField
                 value={''}
                 onChange={onAddField.bind(null)}
-                placeholder="Filter posts"
+                placeholder="Add New Item"
                 fieldType={Picker.fieldTypes.filter}
                 marginB-s3
             >
-                {filters.map(filter => (
+                {options.map(filter => (
                     <Picker.Item key={filter.value} {...filter} />
                 ))}
             </Picker>
