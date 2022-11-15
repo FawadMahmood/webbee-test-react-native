@@ -9,6 +9,8 @@ import { ItemCard } from '../components';
 import { store } from '../stores';
 import { addAttribute } from '../stores/attributes/actions';
 import { getRelevantTypeDataEmptyData } from '../utils/help';
+import { useColumns } from '../utils/columns';
+import { FlashList } from '@shopify/flash-list';
 
 interface CategoryProps {
     route: { params: { id: string } }
@@ -16,7 +18,7 @@ interface CategoryProps {
 
 const Category = ({ route }: CategoryProps) => {
     const dispatch = useDispatch();
-    // const columns = useColumns();
+    const columns = useColumns();
 
     const { id } = route.params;
     const category = useSelector((s: AppState) => s.categories.byIds[id])
@@ -58,6 +60,11 @@ const Category = ({ route }: CategoryProps) => {
         })
     }, [dispatch, fieldIds]);
 
+
+    const _renderItem = ({ item, index }: { item: string, index: number }) => {
+        return <ItemCard id={item} />
+    }
+
     return (
         <View flex >
             <View row spread padding-15>
@@ -67,11 +74,14 @@ const Category = ({ route }: CategoryProps) => {
                 </TouchableOpacity>
             </View>
 
-            {itemIds && itemIds.map((_) => {
-                return (
-                    <ItemCard key={_ + 'item_card'} id={_} />
-                )
-            })}
+
+            <FlashList
+                numColumns={columns}
+                data={itemIds}
+                renderItem={_renderItem.bind(null)}
+                estimatedItemSize={200}
+                contentContainerStyle={styles.contentContainerStyle}
+            />
 
         </View>
     );
@@ -82,6 +92,7 @@ export default Category;
 const styles = StyleSheet.create({
     container: {},
     contentContainerStyle: {
-        paddingBottom: 20
+        paddingBottom: 20,
+        paddingHorizontal: 10
     }
 });
