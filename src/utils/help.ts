@@ -36,5 +36,7 @@ export const getKeyboardType = (type: FieldType) => {
             return 'numeric';
         case "text":
             return 'default'
+        default:
+            return 'default'
     }
 }

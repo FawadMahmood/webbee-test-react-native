@@ -24,6 +24,8 @@ const ItemCard = ({ id }: ItemCardProps) => {
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[item.category_id].fieldIds);
     const attributeIds = useSelector((e: AppState) => e.items.byIds[id].attributeIds);
     const category = useSelector((s: AppState) => s.categories.byIds[item.category_id]);
+    const [title, setTitle] = React.useState(item.name);
+
 
     // let title; //= useSelector((s: AppState) => s.)
     // // ? s.attributes.byIds[category.nameKey as string].name : item.name
@@ -48,20 +50,20 @@ const ItemCard = ({ id }: ItemCardProps) => {
     }
 
 
-    const getTitle = () => React.useCallback(() => {
-        if (category.nameKey) {
-            for (let i = 0; i < attributeIds.length; i++) {
-                const attr = useSelector((s: AppState) => s.attributes.byIds[attributeIds[i]]);
-                console.log("name key matched", attr, category.nameKey);
+    // const getTitle = () => React.useCallback(() => {
+    //     if (category.nameKey) {
+    //         for (let i = 0; i < attributeIds.length; i++) {
+    //             const attr = useSelector((s: AppState) => s.attributes.byIds[attributeIds[i]]);
+    //             console.log("name key matched", attr, category.nameKey);
 
-                if (attr.field_id === category.nameKey) {
-                    return attr.name;
-                }
-            }
-        } else {
-            return item.name;
-        }
-    }, [category.nameKey]);
+    //             if (attr.field_id === category.nameKey) {
+    //                 return attr.name;
+    //             }
+    //         }
+    //     } else {
+    //         return item.name;
+    //     }
+    // }, [category.nameKey]);
 
     // React.useEffect(() => {
     //     let toRemove: string[] = [];
@@ -118,7 +120,12 @@ const ItemCard = ({ id }: ItemCardProps) => {
 
     // }, [fieldIds])
 
-    const title = getTitle();
+    // const title = getTitle();
+
+    const onSetTitle = (name: string) => {
+        // console.log("onSetTitle", name);
+        setTitle(name);
+    }
 
 
     return (
@@ -138,7 +145,7 @@ const ItemCard = ({ id }: ItemCardProps) => {
 
             {attributeIds && attributeIds.map((_, i) => {
                 return (
-                    <Attribute id={_} />
+                    <Attribute id={_} nameKey={category.nameKey} onSetTitle={onSetTitle.bind(null)} />
                 )
             })}
 
