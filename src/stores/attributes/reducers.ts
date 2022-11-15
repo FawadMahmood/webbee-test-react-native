@@ -22,6 +22,9 @@ const fields = (
             delete newState.byIds[action.id];
             newState.allIds = newState.allIds.filter(s => s !== action.id);
             return newState;
+        case UPDATE_ATTRIBUTE:
+            newState.byIds[action.attribute.id] = action.attribute;
+            return newState;
         default:
             return state;
     }

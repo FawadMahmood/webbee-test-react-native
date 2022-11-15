@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, View } from 'react-native-ui-lib';
+import { Text, TouchableOpacity, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, addItemAndAttributeRelation } from '../stores/items/actions';
 import uuid from 'react-native-uuid';
-import { Button } from 'react-native-paper';
 import { addItemRelation } from '../stores/categories/actions';
 import { ItemCard } from '../components';
 import { store } from '../stores';
@@ -61,8 +60,9 @@ const Category = ({ route }: CategoryProps) => {
         <View flex >
             <View row spread padding-15>
                 <Text>{category.name}</Text>
-
-                <Button onPress={addNewItem.bind(null)}>ADD NEW ITEM</Button>
+                <TouchableOpacity onPress={addNewItem.bind(null)} bg-blue padding-5 paddingH-10>
+                    <Text white wbold>ADD NEW ITEM</Text>
+                </TouchableOpacity>
             </View>
 
             {itemIds && itemIds.map((_) => {

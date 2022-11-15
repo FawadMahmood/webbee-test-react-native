@@ -19,10 +19,10 @@ export const deleteAttribute = (
 });
 
 
-// export const updateItem = (
-//     item: Item,
-// ): AddItem => ({
-//     type: UPDATE_ITEM,
-//     item,
-// });
+export const updateAttribute = (
+    attribute: Attribute,
+): AddAttribute => ({
+    type: UPDATE_ATTRIBUTE,
+    attribute,
+});
 

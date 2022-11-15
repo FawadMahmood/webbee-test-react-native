@@ -25,11 +25,13 @@ const ItemCard = ({ id }: ItemCardProps) => {
     const attributeIds = useSelector((e: AppState) => e.items.byIds[id].attributeIds);
     const category = useSelector((s: AppState) => s.categories.byIds[item.category_id]);
 
-    let title; //= useSelector((s: AppState) => s.)
-    // ? s.attributes.byIds[category.nameKey as string].name : item.name
-    console.log("title found", title, category.nameKey);
-    title = "aaa";
+    // let title; //= useSelector((s: AppState) => s.)
+    // // ? s.attributes.byIds[category.nameKey as string].name : item.name
+    // console.log("title found", title, category.nameKey);
+    // title = "aaa";
     // category.nameKey
+
+
     const update = (field: Item) => {
         dispatch(updateItem(field));
     }
@@ -45,29 +47,78 @@ const ItemCard = ({ id }: ItemCardProps) => {
         update({ ...item, [key]: value })
     }
 
+
+    const getTitle = () => React.useCallback(() => {
+        if (category.nameKey) {
+            for (let i = 0; i < attributeIds.length; i++) {
+                const attr = useSelector((s: AppState) => s.attributes.byIds[attributeIds[i]]);
+                console.log("name key matched", attr, category.nameKey);
+
+                if (attr.field_id === category.nameKey) {
+                    return attr.name;
+                }
+            }
+        } else {
+            return item.name;
+        }
+    }, [category.nameKey]);
+
     // React.useEffect(() => {
+    //     let toRemove: string[] = [];
+    //     let _attr = []
     //     fieldIds.forEach((_, i) => {
-    //         if (!attributeIds.includes(_)) {
-    //             const field = store.getState().fields.byIds[_];
-    //             const attr = {
-    //                 id: uuid.v4().toString(),
-    //                 field_id: field.id,
-    //                 item_id: id,
-    //                 name: "New Attribute",
-    //                 type: field.type,
-    //                 value: getRelevantTypeDataEmptyData(field.type),
-    //                 category_id: id,
-    //             };
+    //         let isHave = false;
 
-    //             dispatch(addAttribute(attr));
+    //         attributeIds.map((_) => {
+    //             const attr = store.getState().attributes.byIds[_];
+    //             if (!fieldIds.includes(attr.field_id)) {
+    //                 toRemove.push(attr.id);
+    //             }
+    //         });
 
-    //             dispatch(addItemAndAttributeRelation({
-    //                 id: id,
-    //                 attrubute_id: attr.id
-    //             }));
-    //         }
-    //     })
+
+
+
+    //         // if (!isHave) {
+
+    //         //     isHave = false;
+    //         // } else {
+    //         //     isHave = false;
+    //         // }
+
+    //         // if (!attributeIds.includes(_)) {
+    //         //     const field = store.getState().fields.byIds[_];
+
+    //         //     const attr = {
+    //         //         id: uuid.v4().toString(),
+    //         //         field_id: field.id,
+    //         //         item_id: item.id,
+    //         //         name: "New Attribute",
+    //         //         type: field.type,
+    //         //         value: getRelevantTypeDataEmptyData(field.type),
+    //         //         category_id: item.category_id,
+    //         //     };
+
+    //         //     console.log("seems like some attributes are missing", attr);
+
+    //         //     dispatch(addAttribute(attr));
+
+    //         //     dispatch(addItemAndAttributeRelation({
+    //         //         id: attr.item_id,
+    //         //         attrubute_id: attr.id
+    //         //     }));
+    //         // }
+    //     });
+
+    //     // const filteredArray = fieldIds.filter(value => missingKeys.includes(value));
+
+
+    //     console.log("all missing items, ", fieldIds);
+
+
     // }, [fieldIds])
+
+    const title = getTitle();
 
 
     return (

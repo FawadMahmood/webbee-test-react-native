@@ -27,3 +27,14 @@ export const inputTypes = [
     { label: 'Checkbox', value: 'checkbox' },
     { label: 'Date', value: 'date' }
 ];
+
+export type KeyboardType = 'default' | 'email-address' | 'numeric' | 'phone-pad' | 'number-pad' | 'decimal-pad';
+
+export const getKeyboardType = (type: FieldType) => {
+    switch (type) {
+        case "number":
+            return 'numeric';
+        case "text":
+            return 'default'
+    }
+}

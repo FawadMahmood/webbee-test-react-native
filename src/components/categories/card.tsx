@@ -11,7 +11,9 @@ import { Bounceable } from 'rn-bounceable';
 import { VectorIcon } from '../../components';
 import { theme } from '../../utils/constants';
 import { store } from '../../stores';
-import { inputTypes } from '../../utils/help';
+import { getRelevantTypeDataEmptyData, inputTypes } from '../../utils/help';
+import { addAttribute } from '../../stores/attributes/actions';
+import { addItemAndAttributeRelation } from '../../stores/items/actions';
 
 interface CategoryCardProps {
     id: string;
@@ -49,6 +51,25 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
         }
         dispatch(addField(field));
         dispatch(addFieldRelation({ id: id, item_id: field.id }));
+        console.log(category.itemIds);
+
+        category.itemIds.map((_) => {
+            const attr = {
+                id: uuid.v4().toString(),
+                field_id: field.id,
+                item_id: _,
+                name: "",
+                type: field.type,
+                value: getRelevantTypeDataEmptyData(field.type),
+                category_id: category.id,
+            };
+
+            dispatch(addAttribute(attr));
+            dispatch(addItemAndAttributeRelation({
+                id: _,
+                attrubute_id: attr.id
+            }));
+        })
     }
 
     const removeCategory = () => {
