@@ -58,8 +58,8 @@ const Category = ({ route }: CategoryProps) => {
     }, [dispatch, fieldIds]);
 
     return (
-        <View flex padding-15>
-            <View row spread>
+        <View flex >
+            <View row spread padding-15>
                 <Text>{category.name}</Text>
 
                 <Button onPress={addNewItem.bind(null)}>ADD NEW ITEM</Button>

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAttribute } from '../../stores/attributes/actions';
 import { removeItemAndAttributeRelation } from '../../stores/items/actions';
@@ -13,6 +15,9 @@ const Attribute = ({ id }: AttributeProps) => {
     const attribite = useSelector((s: AppState) => s.attributes.byIds[id]);
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[attribite.category_id].fieldIds);
     const isExist = fieldIds.find(s => s === attribite.field_id);
+    const field = useSelector((s: AppState) => s.fields.byIds[attribite.field_id]);
+
+    console.log("field value", field);
 
 
     React.useEffect(() => {
@@ -27,14 +32,25 @@ const Attribute = ({ id }: AttributeProps) => {
 
 
 
-    }, [isExist])
+    }, [isExist]);
+
+
+
+    const update = (field: Attribute) => {
+        // dispatch(updateItem(field));
+    }
+
+    const onChangeText = (key: string, value: any) => {
+        update({ ...attribite, [key]: value })
+    }
 
     console.log("have this attribute", attribite.field_id, "fieldIds has", fieldIds.find(s => s === attribite.field_id), isExist);
 
     return (
-        <View style={styles.container}>
-            <Text>Attribute</Text>
+        <View marginT-10>
+            <TextInput mode="outlined" label={field.name} onChangeText={onChangeText.bind(null, 'name')} value={attribite.name} />
         </View>
+
     );
 };
 

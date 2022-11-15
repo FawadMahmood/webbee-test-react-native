@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Button, Divider, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { store } from '../../stores';
 import Attribute from './attribute';
 import uuid from 'react-native-uuid';
 import { addAttribute } from '../../stores/attributes/actions';
-import { addItemAndAttributeRelation } from '../../stores/items/actions';
+import { addItemAndAttributeRelation, updateItem } from '../../stores/items/actions';
 import { getRelevantTypeDataEmptyData } from '../../utils/help';
+import { Card, Text, View } from 'react-native-ui-lib';
+import { Bounceable } from 'rn-bounceable';
+import VectorIcon from '../vector';
+import { theme } from '../../utils/constants';
 
 interface ItemCardProps {
     id: string;
@@ -20,6 +24,22 @@ const ItemCard = ({ id }: ItemCardProps) => {
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[item.category_id].fieldIds);
     const attributeIds = useSelector((e: AppState) => e.items.byIds[id].attributeIds);
 
+
+
+    const update = (field: Item) => {
+        dispatch(updateItem(field));
+    }
+
+
+
+
+    const removeItem = () => {
+
+    }
+
+    const onChangeText = (key: string, value: any) => {
+        update({ ...item, [key]: value })
+    }
 
     // React.useEffect(() => {
     //     fieldIds.forEach((_, i) => {
@@ -47,8 +67,19 @@ const ItemCard = ({ id }: ItemCardProps) => {
 
 
     return (
-        <View style={styles.container}>
-            <Text>ItemCard</Text>
+        <Card width={'96%'} marginV-5 padding-15 style={[styles.container]}>
+            <View row spread marginB-10>
+                <Text large wbold style={styles.controlledWidth}>{item.name}</Text>
+                <Bounceable onPress={removeItem.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
+                    <VectorIcon vector={"AntDesign"} name="closecircle" color={theme.color.blue} size={30} />
+                    <Text vsmall wregular>Remove</Text>
+                </Bounceable>
+            </View>
+
+            <Divider />
+
+            <TextInput mode="outlined" label={"Name"} onChangeText={onChangeText.bind(null, 'name')} value={item.name} />
+
 
             {attributeIds && attributeIds.map((_, i) => {
                 return (
@@ -56,13 +87,19 @@ const ItemCard = ({ id }: ItemCardProps) => {
                 )
             })}
 
-            <Button>ADD NEW ATTRIBIUTE</Button>
-        </View>
+        </Card>
     );
 };
 
 export default ItemCard;
 
 const styles = StyleSheet.create({
-    container: {}
+    container: {
+        alignSelf: "center",
+        borderRadius: 10,
+    },
+    controlledWidth: {
+        maxWidth: "80%",
+
+    }
 });

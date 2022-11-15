@@ -1,5 +1,5 @@
 import {
-    ADD_ITEM, ADD_ITEM_ATTRIBUTE_RELATION, REMOVE_ITEM_ATTRIBUTE_RELATION
+    ADD_ITEM, ADD_ITEM_ATTRIBUTE_RELATION, REMOVE_ITEM_ATTRIBUTE_RELATION, UPDATE_ITEM
 } from './actions';
 
 const initialState: ItemState = {
@@ -27,6 +27,9 @@ const fields = (
             console.log("UPPER WALA LOG", newState.byIds[action.relation.id],);
             console.log(REMOVE_ITEM_ATTRIBUTE_RELATION, newState.byIds[action.relation.id]);
             newState.byIds[action.relation.id].attributeIds = newState.byIds[action.relation.id].attributeIds.filter(s => s !== action.relation.attrubute_id)
+            return newState;
+        case UPDATE_ITEM:
+            newState.byIds[action.item.id] = action.item;
             return newState;
         default:
             return state;
