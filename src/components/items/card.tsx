@@ -45,7 +45,7 @@ const ItemCard = ({ id }: ItemCardProps) => {
 
 
     return (
-        <Card width={'100%'} marginV-5 padding-15 style={[styles.container]}>
+        <Card width={'98%'} marginV-5 padding-15 style={[styles.container]}>
             <View row spread marginB-10>
                 <Text large wbold style={styles.controlledWidth}>{title}</Text>
                 <Bounceable onPress={removeItem.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>

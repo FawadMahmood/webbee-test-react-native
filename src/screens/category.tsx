@@ -13,7 +13,8 @@ import { useColumns } from '../utils/columns';
 import { FlashList } from '@shopify/flash-list';
 
 interface CategoryProps {
-    route: { params: { id: string } }
+    route: { params: { id: string } },
+    navigation: any;
 }
 
 const Category = ({ route, navigation }: CategoryProps) => {
