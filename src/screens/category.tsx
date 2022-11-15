@@ -31,6 +31,8 @@ const Category = ({ route }: CategoryProps) => {
             name: "New Item",
             attributeIds: []
         }
+
+
         dispatch(addItem(new_item));
         dispatch(addItemRelation({ id: id, item_id: new_item.id }));
 

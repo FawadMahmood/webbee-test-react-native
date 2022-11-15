@@ -1,5 +1,7 @@
 import { once } from "lodash";
 import { createContext, useContext } from "react";
+import uuid from 'react-native-uuid';
+
 
 // @ts-ignore
 export const createStateContext = once(<T,>() => createContext({} as State<T>));
@@ -39,4 +41,8 @@ export const getKeyboardType = (type: FieldType) => {
         default:
             return 'default'
     }
+}
+
+const getRandomGeneratedId = () => {
+    return uuid.v4().toString();
 }
