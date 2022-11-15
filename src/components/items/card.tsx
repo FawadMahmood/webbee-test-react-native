@@ -48,7 +48,7 @@ const ItemCard = ({ id }: ItemCardProps) => {
     return (
         <Card width={'98%'} marginV-5 padding-15 style={[styles.container]}>
             <View row spread marginB-10>
-                <Text large wbold style={styles.controlledWidth}>{title}</Text>
+                <Text large wbold style={styles.controlledWidth}>{title ? title : "Unnamed Title"}</Text>
                 <Bounceable onPress={removeItem.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
                     <VectorIcon vector={"AntDesign"} name="closecircle" color={theme.color.blue} size={30} />
                     <Text vsmall wregular>Remove</Text>
