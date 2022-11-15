@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
-import { Text, View } from 'react-native-ui-lib';
+import { Picker, Text, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { Bounceable } from 'rn-bounceable';
 import { removeFieldRelation } from '../../stores/categories/actions';
@@ -12,6 +12,14 @@ import VectorIcon from '../vector';
 interface FieldProps {
     id: string;
 }
+
+const options = [
+    { label: 'Text', value: 'text' },
+    { label: 'Number', value: 'number' },
+    { label: 'Checkbox', value: 'checkbox' },
+    { label: 'Date', value: 'date' }
+];
+
 
 const Field = ({ id }: FieldProps) => {
     const dispatch = useDispatch();
@@ -35,6 +43,9 @@ const Field = ({ id }: FieldProps) => {
         update({ ...attribue, [key]: value })
     }
 
+    const onUpdateType = (value: FieldType) => {
+        update({ ...attribue, type: value })
+    }
 
 
     return (
@@ -44,7 +55,21 @@ const Field = ({ id }: FieldProps) => {
             </View>
 
             <View width={100} center>
-                <Text vsmall wbold black>{attribue.type.toUpperCase()}</Text>
+                {/* <Text vsmall wbold black>{attribue.type.toUpperCase()}</Text> */}
+                {/* @ts-ignore */}
+                <Picker
+                    migrate
+                    migrateTextField
+                    value={attribue.type}
+                    onChange={onUpdateType.bind(null)}
+                    placeholder="Add New Item"
+                    fieldType={Picker.fieldTypes.filter}
+                    marginB-s3
+                >
+                    {options.map(filter => (
+                        <Picker.Item key={filter.value} {...filter} />
+                    ))}
+                </Picker>
             </View>
 
             <View center width={30} >
