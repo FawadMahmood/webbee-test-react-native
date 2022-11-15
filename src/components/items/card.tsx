@@ -40,8 +40,22 @@ const ItemCard = ({ id }: ItemCardProps) => {
     }
 
     const onSetTitle = (name: string) => {
-        // console.log("onSetTitle", name);
-        setTitle(name);
+        console.log("onSetTitle", typeof (name));
+
+        switch (typeof (name)) {
+            case "boolean":
+                setTitle(name ? "True" : "False");
+                break;
+            case "string":
+                setTitle(name);
+                break;
+            default:
+                setTitle(name);
+                break;
+
+
+        }
+
     }
 
 

@@ -28,7 +28,7 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
         if (nameKey === attribite.field_id) {
             if (onSetTitle) onSetTitle(attribite.name)
         }
-    }, [attribite, categoy.nameKey])
+    }, [attribite, categoy.nameKey, attribite.value])
 
     const update = (field: Attribute) => {
         dispatch(updateAttribute(field));
@@ -49,7 +49,6 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
         onChangeText('value', moment(date).format("DD/MM/YYYY"));
     }
 
-
     return (
         <View marginT-10>
             <If
@@ -67,7 +66,7 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
                             </View>
                         )}
                         _else={(
-                            <DateTimePicker style={{ height: 50, marginBottom: 0 }} title={moment(attribite.value as string).isValid() ? attribite.value : "Select Date"} placeholder={'Placeholder'} mode={'date'} onChange={onChangeDate.bind(null)} />
+                            <DateTimePicker style={{ height: 50, marginBottom: 0 }} title={moment(attribite.value as string).isValid() ? moment(attribite.value as string).format('DD/MM/YYYY') : "Select Date"} placeholder={'Select Date'} mode={'date'} onChange={onChangeDate.bind(null)} />
                         )}
                     />
                 )}

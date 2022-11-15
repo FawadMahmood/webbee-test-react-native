@@ -1,4 +1,5 @@
 import { once } from "lodash";
+import moment from "moment";
 import { createContext, useContext } from "react";
 import uuid from 'react-native-uuid';
 
@@ -14,7 +15,7 @@ export const getRelevantTypeDataEmptyData = (type: FieldType) => {
         case "checkbox":
             return false
         case "date":
-            return new Date();
+            return moment().format("DD/MM/YYY");
         case "number":
             return 0;
         case "text":
