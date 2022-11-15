@@ -59,7 +59,7 @@ const Category = ({ route }: CategoryProps) => {
     return (
         <View flex >
             <View row spread padding-15>
-                <Text>{category.name}</Text>
+                <Text black large wbold>{category.name}</Text>
                 <TouchableOpacity onPress={addNewItem.bind(null)} bg-blue padding-5 paddingH-10>
                     <Text white wbold>ADD NEW ITEM</Text>
                 </TouchableOpacity>
