@@ -2,7 +2,7 @@ import { LogBox } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PersistGate } from 'redux-persist/integration/react';
-
+import { Provider as PaperProvider } from 'react-native-paper'
 import { AppNavigator } from './src/app';
 import { configureDesignSystem } from './src/utils/designSystem';
 import { initServices, ServicesProvider } from './src/services';
@@ -35,7 +35,9 @@ export default (): JSX.Element => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor} >
           <ServicesProvider>
-            {ready ? <AppNavigator /> : null}
+            <PaperProvider>
+              {ready ? <AppNavigator /> : null}
+            </PaperProvider>
           </ServicesProvider>
         </PersistGate>
       </Provider>

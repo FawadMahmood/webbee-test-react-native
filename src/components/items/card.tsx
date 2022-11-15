@@ -16,35 +16,34 @@ interface ItemCardProps {
 
 const ItemCard = ({ id }: ItemCardProps) => {
     const dispatch = useDispatch();
-
     const item = useSelector((e: AppState) => e.items.byIds[id]);
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[item.category_id].fieldIds);
     const attributeIds = useSelector((e: AppState) => e.items.byIds[id].attributeIds);
 
 
-    React.useEffect(() => {
-        fieldIds.forEach((_, i) => {
-            if (!attributeIds.includes(_)) {
-                const field = store.getState().fields.byIds[_];
-                const attr = {
-                    id: uuid.v4().toString(),
-                    field_id: field.id,
-                    item_id: id,
-                    name: "New Attribute",
-                    type: field.type,
-                    value: getRelevantTypeDataEmptyData(field.type),
-                    category_id: id,
-                };
+    // React.useEffect(() => {
+    //     fieldIds.forEach((_, i) => {
+    //         if (!attributeIds.includes(_)) {
+    //             const field = store.getState().fields.byIds[_];
+    //             const attr = {
+    //                 id: uuid.v4().toString(),
+    //                 field_id: field.id,
+    //                 item_id: id,
+    //                 name: "New Attribute",
+    //                 type: field.type,
+    //                 value: getRelevantTypeDataEmptyData(field.type),
+    //                 category_id: id,
+    //             };
 
-                dispatch(addAttribute(attr));
+    //             dispatch(addAttribute(attr));
 
-                dispatch(addItemAndAttributeRelation({
-                    id: id,
-                    attrubute_id: attr.id
-                }));
-            }
-        })
-    }, [fieldIds])
+    //             dispatch(addItemAndAttributeRelation({
+    //                 id: id,
+    //                 attrubute_id: attr.id
+    //             }));
+    //         }
+    //     })
+    // }, [fieldIds])
 
 
     return (
