@@ -3,7 +3,7 @@ import { removeItem } from "../../stores/items/actions";
 
 
 
-export const removeItemWithReference = (dispatch: any, category_id: string, item_id: string) => {
+export const useRemoveItemWithReference = (dispatch: any, category_id: string, item_id: string) => {
     dispatch(removeItemRelation({
         id: category_id,
         item_id: item_id,

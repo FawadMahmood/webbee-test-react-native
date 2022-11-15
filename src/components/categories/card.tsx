@@ -14,6 +14,7 @@ import { store } from '../../stores';
 import { getRelevantTypeDataEmptyData, inputTypes } from '../../utils/help';
 import { addAttribute, deleteAttribute } from '../../stores/attributes/actions';
 import { addItemAndAttributeRelation, removeItemAndAttributeRelation } from '../../stores/items/actions';
+import { useRemoveItemWithReference } from '../../utils/helpers/useRemoveItem';
 
 interface CategoryCardProps {
     id: string;
@@ -103,11 +104,12 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
         category.itemIds.map((_) => {
             store.getState().items.byIds[_].attributeIds.map((attr) => {
                 if (store.getState().attributes.byIds[attr].field_id === _) {
-                    dispatch(removeItemAndAttributeRelation({
-                        id: store.getState().attributes.byIds[attr].item_id,
-                        attrubute_id: store.getState().attributes.byIds[attr].id
-                    }));
-                    dispatch(deleteAttribute(store.getState().attributes.byIds[attr].id));
+                    useRemoveItemWithReference(dispatch, store.getState().attributes.byIds[attr].item_id, store.getState().attributes.byIds[attr].id);
+                    // dispatch(removeItemAndAttributeRelation({
+                    //     id: store.getState().attributes.byIds[attr].item_id,
+                    //     attrubute_id: store.getState().attributes.byIds[attr].id
+                    // }));
+                    // dispatch(deleteAttribute(store.getState().attributes.byIds[attr].id));
                 }
             })
         })
