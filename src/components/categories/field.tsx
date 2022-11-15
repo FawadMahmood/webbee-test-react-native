@@ -35,6 +35,8 @@ const Field = ({ id }: FieldProps) => {
         update({ ...attribue, [key]: value })
     }
 
+
+
     return (
         <View marginT-3 row style={styles.container}>
             <View flex>
