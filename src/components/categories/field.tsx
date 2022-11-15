@@ -52,7 +52,7 @@ const Field = ({ id, onRemovedItem }: FieldProps) => {
                 <TextInput mode="outlined" onChangeText={onChangeText.bind(null, 'name')} label={"Name"} value={attribue.name?.toString()} />
             </View>
 
-            <View width={100} center>
+            <View width={120} center>
                 {/* @ts-ignore */}
                 <Picker
                     migrate
@@ -60,11 +60,15 @@ const Field = ({ id, onRemovedItem }: FieldProps) => {
                     value={attribue.type}
                     onChange={onUpdateType.bind(null)}
                     placeholder="Add New Item"
-                    fieldType={Picker.fieldTypes.filter}
-                    marginB-s3
+                    fieldType={Picker.fieldTypes.form}
+                    style={{
+                        top: 15,
+                        left: 15
+                    }}
+                // labelStyle={styles.label}
                 >
                     {inputTypes.map(filter => (
-                        <Picker.Item key={filter.value} {...filter} />
+                        <Picker.Item labelStyle={styles.label} key={filter.value} {...filter} />
                     ))}
                 </Picker>
             </View>
@@ -81,5 +85,8 @@ const Field = ({ id, onRemovedItem }: FieldProps) => {
 export default Field;
 
 const styles = StyleSheet.create({
-    container: {}
+    container: {},
+    label: {
+        fontSize: theme.fontSize.extraSmall
+    }
 });

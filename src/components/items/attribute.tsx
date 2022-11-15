@@ -67,7 +67,7 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
                             </View>
                         )}
                         _else={(
-                            <DateTimePicker title={moment(attribite.value as string).isValid() ? attribite.value : ""} placeholder={'Placeholder'} mode={'date'} onChange={onChangeDate.bind(null)} />
+                            <DateTimePicker style={{ height: 50, marginBottom: 0 }} title={moment(attribite.value as string).isValid() ? attribite.value : "Select Date"} placeholder={'Placeholder'} mode={'date'} onChange={onChangeDate.bind(null)} />
                         )}
                     />
                 )}
