@@ -36,3 +36,10 @@ export const updateItem = (
     item,
 });
 
+export const removeItem = (
+    id: string,
+): RemoveItem => ({
+    type: DELETE_ITEM,
+    id,
+});
+

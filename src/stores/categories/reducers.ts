@@ -1,5 +1,5 @@
 import {
-    ADD_CATEGORY, ADD_FIELD_RELATION, ADD_ITEM_RELATION, DELETE_CATEGORY, REMOVE_FIELD_RELATION, UPDATE_CATEGORY
+    ADD_CATEGORY, ADD_FIELD_RELATION, ADD_ITEM_RELATION, DELETE_CATEGORY, REMOVE_FIELD_RELATION, REMOVE_ITEM_RELATION, UPDATE_CATEGORY
 } from './actions';
 
 const initialState: CategoryState = {
@@ -30,6 +30,9 @@ const categories = (
             return newState;
         case ADD_ITEM_RELATION:
             newState.byIds[action.relation.id].itemIds = [...newState.byIds[action.relation.id].itemIds, action.relation.item_id]
+            return newState;
+        case REMOVE_ITEM_RELATION:
+            newState.byIds[action.relation.id].itemIds = newState.byIds[action.relation.id].itemIds.filter(s => s !== action.relation.item_id);
             return newState;
         case REMOVE_FIELD_RELATION:
             newState.byIds[action.relation.id].fieldIds = newState.byIds[action.relation.id].fieldIds.filter(s => s !== action.relation.item_id);

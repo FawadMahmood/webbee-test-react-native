@@ -5,6 +5,7 @@ export const ADD_FIELD_RELATION = 'ADD_FIELD_RELATION';
 export const REMOVE_FIELD_RELATION = 'REMOVE_FIELD_RELATION';
 
 export const ADD_ITEM_RELATION = 'ADD_ITEM_RELATION';
+export const REMOVE_ITEM_RELATION = 'REMOVE_ITEM_RELATION';
 
 
 
@@ -38,6 +39,12 @@ export const addItemRelation = (
     relation,
 });
 
+export const removeItemRelation = (
+    relation: CategoryRelation,
+): AddCategoryItemRelation => ({
+    type: REMOVE_ITEM_RELATION,
+    relation,
+});
 
 export const updateCategory = (
     category: Category,

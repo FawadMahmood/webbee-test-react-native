@@ -128,8 +128,6 @@ type CategoryRelation = {
     item_id: string;
 }
 
-
-
 interface AddCategory {
     type: string;
     category: Category
@@ -179,7 +177,12 @@ interface AddItem {
     item: Item
 }
 
-type ItemActionTypes_U = (AddItem & AddAttributeRelation)
+interface RemoveItem {
+    type: string;
+    id: string
+}
+
+type ItemActionTypes_U = (AddItem & AddAttributeRelation & RemoveItem)
 
 // item type
 

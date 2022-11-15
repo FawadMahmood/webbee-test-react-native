@@ -8,6 +8,7 @@ import { Card, Text, View } from 'react-native-ui-lib';
 import { Bounceable } from 'rn-bounceable';
 import VectorIcon from '../vector';
 import { theme } from '../../utils/constants';
+import { removeItemWithReference } from '../../utils/helpers/useRemoveItem';
 
 interface ItemCardProps {
     id: string;
@@ -31,7 +32,7 @@ const ItemCard = ({ id }: ItemCardProps) => {
 
 
     const removeItem = () => {
-
+        removeItemWithReference(dispatch, item.category_id, item.id);
     }
 
     const onChangeText = (key: string, value: any) => {

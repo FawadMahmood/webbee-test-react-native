@@ -1,5 +1,5 @@
 import {
-    ADD_ITEM, ADD_ITEM_ATTRIBUTE_RELATION, REMOVE_ITEM_ATTRIBUTE_RELATION, UPDATE_ITEM
+    ADD_ITEM, ADD_ITEM_ATTRIBUTE_RELATION, DELETE_ITEM, REMOVE_ITEM_ATTRIBUTE_RELATION, UPDATE_ITEM
 } from './actions';
 
 const initialState: ItemState = {
@@ -30,6 +30,10 @@ const fields = (
             return newState;
         case UPDATE_ITEM:
             newState.byIds[action.item.id] = action.item;
+            return newState;
+        case DELETE_ITEM:
+            delete newState.byIds[action.id]
+            newState.allIds = newState.allIds.filter(s => s !== action.id);
             return newState;
         default:
             return state;

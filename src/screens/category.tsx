@@ -74,7 +74,7 @@ const Category = ({ route, navigation }: CategoryProps) => {
     return (
         <View flex >
             <View row spread padding-15>
-                <Text black large wbold>{category.name}</Text>
+                <Text black medium wbold style={styles.controlledWidth}>{category.name}</Text>
                 <TouchableOpacity onPress={addNewItem.bind(null)} bg-blue padding-5 paddingH-10>
                     <Text white wbold>ADD NEW ITEM</Text>
                 </TouchableOpacity>
@@ -100,5 +100,9 @@ const styles = StyleSheet.create({
     contentContainerStyle: {
         paddingBottom: 20,
         paddingHorizontal: 10
+    },
+    controlledWidth: {
+        maxWidth: "80%",
+
     }
 });
