@@ -16,7 +16,7 @@ interface CategoryProps {
     route: { params: { id: string } }
 }
 
-const Category = ({ route }: CategoryProps) => {
+const Category = ({ route, navigation }: CategoryProps) => {
     const dispatch = useDispatch();
     const columns = useColumns();
 
@@ -25,6 +25,11 @@ const Category = ({ route }: CategoryProps) => {
     const itemIds = useSelector((s: AppState) => s.categories.byIds[id].itemIds)
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[id].fieldIds)
 
+    React.useEffect(() => {
+        if (navigation) {
+            navigation.setOptions({ title: category.name })
+        }
+    }, [category])
 
     const addNewItem = React.useCallback(() => {
         const new_item: Item = {
