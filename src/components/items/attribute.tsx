@@ -2,11 +2,12 @@ import { If } from '@kanzitelli/if-component';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, TextInput } from 'react-native-paper';
-import { Switch, View } from 'react-native-ui-lib';
+import { DateTimePicker, Switch, View } from 'react-native-ui-lib';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAttribute, updateAttribute } from '../../stores/attributes/actions';
 import { removeItemAndAttributeRelation } from '../../stores/items/actions';
 import { getKeyboardType } from '../../utils/help';
+import moment from 'moment'
 
 interface AttributeProps {
     id: string;
@@ -44,6 +45,10 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
 
     console.log("attribute value", attribite);
 
+    const onChangeDate = (date: Date) => {
+        onChangeText('value', moment(date).format("DD/MM/YYYY"));
+    }
+
 
     return (
         <View marginT-10>
@@ -60,6 +65,9 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
                                 <Text>{field.name + "? "}</Text>
                                 <Switch value={typeof (attribite.value) === "boolean" ? attribite.value : attribite.value === "true"} onValueChange={onChangeText.bind(null, 'value')} />
                             </View>
+                        )}
+                        _else={(
+                            <DateTimePicker title={moment(attribite.value as string).isValid() ? attribite.value : ""} placeholder={'Placeholder'} mode={'date'} onChange={onChangeDate.bind(null)} />
                         )}
                     />
                 )}
