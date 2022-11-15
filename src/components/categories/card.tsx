@@ -33,14 +33,10 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[id].fieldIds);
     const dispatch = useDispatch();
 
-    // const selection = Object.keys(category).filter(e => (e !== "fieldIds" && e !== "itemIds" && e !== "id"));
-
     const titleSelections = fieldIds.map(s => {
         const field = store.getState().fields.byIds[s];
         return { label: field.name, value: field.id }
     })
-
-    // console.log("label selection", titleSelections);
 
 
     const onAddNewField = (type: FieldType) => {
