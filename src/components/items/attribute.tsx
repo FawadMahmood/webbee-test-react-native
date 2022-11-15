@@ -18,6 +18,8 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
     const attribite = useSelector((s: AppState) => s.attributes.byIds[id]);
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[attribite.category_id].fieldIds);
     const field = useSelector((s: AppState) => s.fields.byIds[attribite.field_id]);
+    const categoy = useSelector((s: AppState) => s.categories.byIds[attribite.category_id]);
+
 
 
     React.useEffect(() => {
@@ -25,7 +27,7 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
             console.log("oh my name key");
             if (onSetTitle) onSetTitle(attribite.name)
         }
-    }, [attribite, field])
+    }, [attribite, categoy.nameKey])
 
     const update = (field: Attribute) => {
         dispatch(updateAttribute(field));
