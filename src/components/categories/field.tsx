@@ -7,18 +7,14 @@ import { Bounceable } from 'rn-bounceable';
 import { removeFieldRelation } from '../../stores/categories/actions';
 import { deleteField, updateField } from '../../stores/fields/actions';
 import { theme } from '../../utils/constants';
+import { inputTypes } from '../../utils/help';
 import VectorIcon from '../vector';
 
 interface FieldProps {
     id: string;
 }
 
-const options = [
-    { label: 'Text', value: 'text' },
-    { label: 'Number', value: 'number' },
-    { label: 'Checkbox', value: 'checkbox' },
-    { label: 'Date', value: 'date' }
-];
+
 
 
 const Field = ({ id }: FieldProps) => {
@@ -55,7 +51,6 @@ const Field = ({ id }: FieldProps) => {
             </View>
 
             <View width={100} center>
-                {/* <Text vsmall wbold black>{attribue.type.toUpperCase()}</Text> */}
                 {/* @ts-ignore */}
                 <Picker
                     migrate
@@ -66,7 +61,7 @@ const Field = ({ id }: FieldProps) => {
                     fieldType={Picker.fieldTypes.filter}
                     marginB-s3
                 >
-                    {options.map(filter => (
+                    {inputTypes.map(filter => (
                         <Picker.Item key={filter.value} {...filter} />
                     ))}
                 </Picker>

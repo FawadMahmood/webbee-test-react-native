@@ -19,3 +19,11 @@ export const getRelevantTypeDataEmptyData = (type: FieldType) => {
             return "";
     }
 }
+
+
+export const inputTypes = [
+    { label: 'Text', value: 'text' },
+    { label: 'Number', value: 'number' },
+    { label: 'Checkbox', value: 'checkbox' },
+    { label: 'Date', value: 'date' }
+];

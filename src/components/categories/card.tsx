@@ -11,6 +11,7 @@ import { Bounceable } from 'rn-bounceable';
 import { VectorIcon } from '../../components';
 import { theme } from '../../utils/constants';
 import { store } from '../../stores';
+import { inputTypes } from '../../utils/help';
 
 interface CategoryCardProps {
     id: string;
@@ -110,7 +111,7 @@ const CategoryCard = ({ id }: CategoryCardProps) => {
                 fieldType={Picker.fieldTypes.filter}
                 marginB-s3
             >
-                {options.map(filter => (
+                {inputTypes.map(filter => (
                     <Picker.Item key={filter.value} {...filter} />
                 ))}
             </Picker>
