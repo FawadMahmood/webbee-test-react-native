@@ -1,13 +1,9 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Divider, TextInput } from 'react-native-paper';
+import { Divider, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { store } from '../../stores';
 import Attribute from './attribute';
-import uuid from 'react-native-uuid';
-import { addAttribute } from '../../stores/attributes/actions';
-import { addItemAndAttributeRelation, updateItem } from '../../stores/items/actions';
-import { getRelevantTypeDataEmptyData } from '../../utils/help';
+import { updateItem } from '../../stores/items/actions';
 import { Card, Text, View } from 'react-native-ui-lib';
 import { Bounceable } from 'rn-bounceable';
 import VectorIcon from '../vector';
@@ -27,13 +23,6 @@ const ItemCard = ({ id }: ItemCardProps) => {
     const [title, setTitle] = React.useState(item.name);
 
 
-    // let title; //= useSelector((s: AppState) => s.)
-    // // ? s.attributes.byIds[category.nameKey as string].name : item.name
-    // console.log("title found", title, category.nameKey);
-    // title = "aaa";
-    // category.nameKey
-
-
     const update = (field: Item) => {
         dispatch(updateItem(field));
     }
@@ -48,79 +37,6 @@ const ItemCard = ({ id }: ItemCardProps) => {
     const onChangeText = (key: string, value: any) => {
         update({ ...item, [key]: value })
     }
-
-
-    // const getTitle = () => React.useCallback(() => {
-    //     if (category.nameKey) {
-    //         for (let i = 0; i < attributeIds.length; i++) {
-    //             const attr = useSelector((s: AppState) => s.attributes.byIds[attributeIds[i]]);
-    //             console.log("name key matched", attr, category.nameKey);
-
-    //             if (attr.field_id === category.nameKey) {
-    //                 return attr.name;
-    //             }
-    //         }
-    //     } else {
-    //         return item.name;
-    //     }
-    // }, [category.nameKey]);
-
-    // React.useEffect(() => {
-    //     let toRemove: string[] = [];
-    //     let _attr = []
-    //     fieldIds.forEach((_, i) => {
-    //         let isHave = false;
-
-    //         attributeIds.map((_) => {
-    //             const attr = store.getState().attributes.byIds[_];
-    //             if (!fieldIds.includes(attr.field_id)) {
-    //                 toRemove.push(attr.id);
-    //             }
-    //         });
-
-
-
-
-    //         // if (!isHave) {
-
-    //         //     isHave = false;
-    //         // } else {
-    //         //     isHave = false;
-    //         // }
-
-    //         // if (!attributeIds.includes(_)) {
-    //         //     const field = store.getState().fields.byIds[_];
-
-    //         //     const attr = {
-    //         //         id: uuid.v4().toString(),
-    //         //         field_id: field.id,
-    //         //         item_id: item.id,
-    //         //         name: "New Attribute",
-    //         //         type: field.type,
-    //         //         value: getRelevantTypeDataEmptyData(field.type),
-    //         //         category_id: item.category_id,
-    //         //     };
-
-    //         //     console.log("seems like some attributes are missing", attr);
-
-    //         //     dispatch(addAttribute(attr));
-
-    //         //     dispatch(addItemAndAttributeRelation({
-    //         //         id: attr.item_id,
-    //         //         attrubute_id: attr.id
-    //         //     }));
-    //         // }
-    //     });
-
-    //     // const filteredArray = fieldIds.filter(value => missingKeys.includes(value));
-
-
-    //     console.log("all missing items, ", fieldIds);
-
-
-    // }, [fieldIds])
-
-    // const title = getTitle();
 
     const onSetTitle = (name: string) => {
         // console.log("onSetTitle", name);
