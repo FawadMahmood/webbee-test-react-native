@@ -25,10 +25,10 @@ const ItemCard = ({ id }: ItemCardProps) => {
     const attributeIds = useSelector((e: AppState) => e.items.byIds[id].attributeIds);
     const category = useSelector((s: AppState) => s.categories.byIds[item.category_id]);
 
-    let title = useSelector((s: AppState) => s.attributes.byIds[category.nameKey as string] ? s.attributes.byIds[category.nameKey as string].name : item.name)
-
+    let title; //= useSelector((s: AppState) => s.)
+    // ? s.attributes.byIds[category.nameKey as string].name : item.name
     console.log("title found", title, category.nameKey);
-
+    title = "aaa";
     // category.nameKey
     const update = (field: Item) => {
         dispatch(updateItem(field));
