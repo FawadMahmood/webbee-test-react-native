@@ -24,7 +24,6 @@ const Attribute = ({ id, nameKey, onSetTitle }: AttributeProps) => {
 
     React.useEffect(() => {
         if (nameKey === attribite.field_id) {
-            console.log("oh my name key");
             if (onSetTitle) onSetTitle(attribite.name)
         }
     }, [attribite, categoy.nameKey])
