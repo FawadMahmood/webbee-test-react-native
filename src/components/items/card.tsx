@@ -23,9 +23,13 @@ const ItemCard = ({ id }: ItemCardProps) => {
     const item = useSelector((e: AppState) => e.items.byIds[id]);
     const fieldIds = useSelector((s: AppState) => s.categories.byIds[item.category_id].fieldIds);
     const attributeIds = useSelector((e: AppState) => e.items.byIds[id].attributeIds);
+    const category = useSelector((s: AppState) => s.categories.byIds[item.category_id]);
 
+    let title = useSelector((s: AppState) => s.attributes.byIds[category.nameKey as string] ? s.attributes.byIds[category.nameKey as string].name : item.name)
 
+    console.log("title found", title, category.nameKey);
 
+    // category.nameKey
     const update = (field: Item) => {
         dispatch(updateItem(field));
     }
@@ -69,7 +73,7 @@ const ItemCard = ({ id }: ItemCardProps) => {
     return (
         <Card width={'96%'} marginV-5 padding-15 style={[styles.container]}>
             <View row spread marginB-10>
-                <Text large wbold style={styles.controlledWidth}>{item.name}</Text>
+                <Text large wbold style={styles.controlledWidth}>{title}</Text>
                 <Bounceable onPress={removeItem.bind(null)} contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
                     <VectorIcon vector={"AntDesign"} name="closecircle" color={theme.color.blue} size={30} />
                     <Text vsmall wregular>Remove</Text>
